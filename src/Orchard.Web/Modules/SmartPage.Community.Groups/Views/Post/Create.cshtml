@@ -1,0 +1,30 @@
+@using System.Web.Mvc.Html
+@using Orchard.Mvc.Html
+@using SmartPage.Community.Groups.Extensions
+@using SmartPage.Community.Groups.Helpers
+@using SmartPage.Community.Groups.Models
+@{
+    Script.Require("jQuery");
+    Layout.Title = T("New Post").ToString();
+    GroupPart groupPart = HierarchyHelpers.GetGroup(Model.ContentItem);
+    DepartmentPart departmentPart = HierarchyHelpers.GetDepartmentPart(Model.ContentItem);
+}
+<h2>@Layout.Title</h2>
+
+<ol class="breadcrumb">
+    <li>
+        <a href="@Url.GroupEdit(groupPart)" class="edit">1. @groupPart.Title <i class="fa fa-check"> </i></a>
+    </li>
+    <li>
+        <a href="@Url.DepartmentForEditor(departmentPart)" class="edit">2. @departmentPart.Title <i class="fa fa-check"> </i></a>
+    </li>
+    <li class="active">
+        <span>@T("3. Post content")</span>
+    </li>
+</ol>
+@using (Html.BeginFormAntiForgeryPost(Url.Action("Create", new { contentId = Request.QueryString["contentId"], type = Model.ContentItem.TypeDefinition.Name })))
+{
+    @Html.ValidationSummary()
+    // Model is a Shape, calling Display() so that it is rendered using the most specific template for its Shape type
+    @Display(Model)
+}

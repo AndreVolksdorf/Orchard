@@ -1,0 +1,66 @@
+﻿@using Orchard.Autoroute.Models
+@using Orchard.ContentManagement
+@using Orchard.Core.Common.Models
+@using Orchard.Core.Title.Models
+@using SmartPage.Community.Groups.Extensions
+@using SmartPage.Community.Groups.Models
+<div class="actions">
+    <ul class="nav navbar-nav menu menu-gruppen">
+
+        @if (Model.GroupPart == null)
+        {
+            <li class="first">
+                <span>@T("Create group")</span>
+            </li>
+            <li>
+                <span>@T("Create department")</span>
+            </li>
+            <li>
+                <span>@T("Post content")</span>
+            </li>
+        }
+        else {
+            var groupPart = (GroupPart)Model.GroupPart;
+            <li class="first">
+                @if (Authorizer.Authorize(Permissions.ManageGroups, groupPart))
+                {
+                    <a href="@Url.GroupEdit((GroupPart) Model.GroupPart)" class="edit" title="@T("Edit group")"><i class="fa fa-wrench"> </i> @groupPart.Title</a>
+                }
+                else {
+                    <span>@groupPart.Title</span>
+                }
+            </li>
+            if (Model.DepartmentPart == null)
+            {
+                <li>
+                    <span>@T("Create department")</span>
+                </li>
+                <li>
+                    <span>@T("Post content")</span>
+                </li>
+            }
+            else {
+                var departmentPart = (DepartmentPart)Model.DepartmentPart;
+                <li>
+                    @if (Authorizer.Authorize(Permissions.EditGroupContent, departmentPart))
+                    {
+                        <a href="@Url.DepartmentForEditor(departmentPart)"><i class="fa-phone fa-wrench"> </i> @departmentPart.Title</a>
+                    }
+                    else {
+                        <span>@departmentPart.Title</span>
+                    }
+                </li>
+                <li>
+                    @if (Model.GroupPost == null)
+                    {
+                        <span>@T("Post content")</span>
+                    }
+                    else {
+                        var groupPostPart = (TitlePart)Model.PostPart;
+                        <span>@groupPostPart.Title</span>
+                    }
+                </li>
+            }
+        }
+    </ul>
+</div>

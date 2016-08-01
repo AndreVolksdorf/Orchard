@@ -1,0 +1,6 @@
+@using SmartPage.Community.Groups.Extensions
+@{ Layout.Title = T("Create New Group").ToString(); }
+
+@foreach (var type in Model.GroupTypes) {
+    <p>@Html.ActionLink((string)type.DisplayName, "Create", new { Area = Constants.LocalArea, Type = (string)type.Name}, new { @class = "create" })</p>
+}

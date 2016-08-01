@@ -1,0 +1,29 @@
+@using System.Web.Mvc.Html
+@using Orchard.Mvc.Html
+@using SmartPage.Community.Groups.Extensions
+@using SmartPage.Community.Groups.Helpers
+@using SmartPage.Community.Groups.Models
+@{
+    Layout.Title = T("Create Department").ToString();
+    GroupPart groupPart = HierarchyHelpers.GetGroup(Model.ContentItem);
+}
+
+<h2>@Layout.Title</h2>
+
+<ol class="breadcrumb">
+    <li>
+        <a href="@Url.GroupEdit(groupPart)" class="edit">1. @groupPart.Title <i class="fa fa-check"> </i></a>
+    </li>
+    <li class="active">
+        <span>@T("2. Create department")</span>
+    </li>
+    <li>
+        <span>@T("3. Create post")</span>
+    </li>
+</ol>
+@using (Html.BeginFormAntiForgeryPost(Url.DepartmentCreate(int.Parse(Request.QueryString["groupId"]), Request.QueryString["type"]), FormMethod.Post, new { @id = "department-create" }))
+{
+    @Html.ValidationSummary()
+
+    @Display(Model)
+}

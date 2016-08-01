@@ -1,0 +1,37 @@
+﻿@using SmartPage.Community.Groups.Models
+@using SmartPage.Community.Roles.Models
+@using System.Linq;
+@using System.Collections.Generic;
+@model SmartPage.Community.Groups.Models.GroupPart
+@{
+    var list = Model.Groups.Select(u => new SelectListItem() { Value = u.Id.ToString(), Text = u.Name, Selected = (Model.Group != null && u == Model.Group) }).ToList();
+    Script.Require("jQuery");
+}
+<fieldset>
+    @Html.LabelFor(m => m.Description, T("Description"))
+        @Html.TextAreaFor(m => m.Description, 5, 60, null)
+        <h6 class="pull-right" id="@Html.IdFor(m => m.Description)_count"></h6>
+    <span class="hint">@T("Please enter a short description of the department. 256 chars max")</span>
+</fieldset>
+
+<fieldset style="display: none;">
+    @Html.LabelFor(m => m.Group, T("Group"))
+    @Html.DropDownListFor(m => m.GroupId, list, T("create new group").Text,new {})
+</fieldset>
+    @using (Script.Foot())
+    {
+        <script>
+            var @Html.IdFor(m => m.Description)_max = 256;
+            var @Html.IdFor(m => m.Description)_length = $('#@Html.IdFor(m => m.Description)').val().length;
+            var @Html.IdFor(m => m.Description)_remaining = @Html.IdFor(m => m.Description)_max - @Html.IdFor(m => m.Description)_length;
+
+            $('#@Html.IdFor(m => m.Description)_count').html(@Html.IdFor(m => m.Description)_remaining + '@T(" remaining")');
+
+            $('#@Html.IdFor(m => m.Description)').keyup(function () {
+                var @Html.IdFor(m => m.Description)_length = $('#@Html.IdFor(m => m.Description)').val().length;
+                var @Html.IdFor(m => m.Description)_remaining = @Html.IdFor(m => m.Description)_max - @Html.IdFor(m => m.Description)_length;
+
+                $('#@Html.IdFor(m => m.Description)_count').html(@Html.IdFor(m => m.Description)_remaining + '@T(" remaining")');
+            });
+        </script>
+    }

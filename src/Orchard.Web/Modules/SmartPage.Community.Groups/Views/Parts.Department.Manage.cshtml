@@ -1,0 +1,35 @@
+﻿@using SmartPage.Community.Groups.Extensions
+@using SmartPage.Community.Groups.Models
+@{
+    var departmentPart = (DepartmentPart)Model.DepartmentPart;
+    var newGroupPostPart = (GroupPostPart)Model.NewPost;
+}
+<div class="item-properties actions">
+    @if (Authorizer.Authorize(Orchard.Core.Contents.Permissions.EditContent, departmentPart))
+    {
+        <a href="@Url.DepartmentForEditor(newGroupPostPart.DepartmentPart)" class="edit">@T("Edit")</a>
+    }
+    @if (Authorizer.Authorize(Orchard.Core.Contents.Permissions.DeleteContent, departmentPart))
+    {
+        <a href="@Url.DepartmentDelete(newGroupPostPart.DepartmentPart)" class="remove">@T("Delete")</a>
+    }
+    @if (Authorizer.Authorize(Permissions.EditGroupContent, newGroupPostPart))
+    {
+        if (!newGroupPostPart.DepartmentPart.IsClosed)
+        {
+            <ul class="nav navbar-nav">
+                <li class="dropdown last">
+                    <a href="@Url.PostCreate(newGroupPostPart.DepartmentPart)" data-toggle="dropdown" class="dropdown-toggle" aria-expanded="false">@T("Create post for this Department") <i class="fa fa-angle-down"></i></a>
+                    <ul class="dropdown-menu">
+                        @foreach (var type in Model.PostTypes)
+                        {
+                            <li>
+                                <a href="@Url.PostCreate(departmentPart, (string) type.Name)">@type.DisplayName</a>
+                            </li>
+                        }
+                    </ul>
+                </li>
+            </ul>
+        }
+    }
+</div>

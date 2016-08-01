@@ -1,0 +1,10 @@
+﻿<Placement>
+  <!--<Place Parts_LikeButton="Content:1"/>
+  <Place Parts_LikeButton_Edit="Content:7.5"/>-->
+  <Match DisplayType="Detail">
+    <Place Parts_LikeButton="Content:10"/>
+  </Match>
+  <Match DisplayType="Summary">
+    <Place Parts_LikeCounter="Content:10"/>
+  </Match>
+</Placement>

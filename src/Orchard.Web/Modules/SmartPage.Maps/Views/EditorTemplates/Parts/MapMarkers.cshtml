@@ -1,0 +1,19 @@
+﻿@model SmartPage.Maps.Models.MapMarkersPart
+
+<fieldset>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Height)
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(model => model.Height)
+        @Html.ValidationMessageFor(model => model.Height)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.ScanContainedItems)
+    </div>
+    <div class="editor-field">
+        @Html.CheckBoxFor(model => model.ScanContainedItems)
+        @Html.ValidationMessageFor(model => model.ScanContainedItems)
+    </div>
+</fieldset>

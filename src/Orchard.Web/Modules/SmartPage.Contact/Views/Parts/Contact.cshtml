@@ -1,0 +1,19 @@
+﻿@if (!string.IsNullOrWhiteSpace(Model.Phone) || !string.IsNullOrWhiteSpace(Model.Email) || !string.IsNullOrWhiteSpace(Model.Website))
+{
+    <div class="Contact">
+        <dl>
+            @if (!string.IsNullOrEmpty(Model.Phone))
+            {
+                <dt><i class="fa fa-phone"> </i> <span class="sr-only">@T("Phone:")</span> @Display(Model.Phone)</dt>
+            }
+            @if (!string.IsNullOrEmpty(Model.Email))
+            {
+                <dt><i class="fa fa-envelope"> </i> <span class="sr-only">@T("Email:")</span> <a href="mailto:@Display(Model.Email)">@Display(Model.Email)</a></dt>
+            }
+            @if (!string.IsNullOrEmpty(Model.Website))
+            {
+                <dt><i class="fa fa-bookmark"> </i> <span class="sr-only">@T("Website:")</span> <a target="_blank" href="//@Display(Model.Website)">@Display(Model.Website)</a></dt>
+            }
+        </dl>
+    </div>
+}

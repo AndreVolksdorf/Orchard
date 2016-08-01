@@ -1,0 +1,9 @@
+﻿@using Orchard.ContentManagement
+@using Orchard.ContentManagement.Aspects
+@using SmartPage.Community.Groups.Models
+@{
+    ContentItem contentItem = (ContentItem) Model.ContentItem;
+    var postPart = contentItem.As<GroupPostPart>();
+    var commonPart = contentItem.As<ICommonPart>();
+}
+<blockquote>@postPart.Text -@commonPart.Owner.UserName</blockquote> @Environment.NewLine

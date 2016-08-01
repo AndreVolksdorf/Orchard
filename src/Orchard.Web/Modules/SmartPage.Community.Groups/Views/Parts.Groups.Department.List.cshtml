@@ -1,0 +1,16 @@
+﻿@using Orchard.Utility.Extensions
+@using SmartPage.Community.Groups.Extensions
+@using SmartPage.Community.Groups.Models
+@{
+    IEnumerable<object> departments = Model.ContentItems;
+    GroupPart contentPart = Model.ContentPart;
+    Model.ContentItems.Classes.Add("content-items");
+    var contentTypeClassName = ((string)contentPart.ContentItem.ContentType + "-departments").HtmlClassify();
+    Model.ContentItems.Classes.Add(contentTypeClassName);
+}
+@Display(Model.ContentItems)
+@if (departments == null || departments.Count() < 1) {
+    <p class="nocontentitems">@T("There are no departments for this group.")</p>
+} else { 
+  @Display(Model.Pager)
+}

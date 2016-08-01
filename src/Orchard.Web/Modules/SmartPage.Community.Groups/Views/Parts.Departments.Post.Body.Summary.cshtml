@@ -1,0 +1,12 @@
+﻿@using Orchard.UI.Navigation
+@using SmartPage.Community.Groups.Extensions
+@using SmartPage.Community.Groups.Models
+@using SmartPage.Community.Groups.ViewModels
+@{ 
+    string bodyHtml = Model.Html.ToString();
+    var body = new HtmlString(Html.Excerpt(bodyHtml, 200).ToString().Replace(Environment.NewLine, "</p>" + Environment.NewLine + "<p>"));
+
+    GroupPostPart post = (GroupPostPart) Model.ContentPart;
+    Pager pager = (DepartmentPager) Model.Pager;
+}
+<p>@body</p>

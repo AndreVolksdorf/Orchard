@@ -1,0 +1,17 @@
+﻿@using SmartPage.Community.Groups.Extensions
+@using SmartPage.Community.Groups.Models
+@{
+    var postPart = (GroupPostPart)Model.ContentPart;
+    var newGroupPostPart = (GroupPostPart)Model.NewPost;
+}
+
+<div class="item-properties actions">
+    @if (Authorizer.Authorize(Permissions.EditGroupContent, newGroupPostPart))
+    {
+        <a href="@Url.PostEdit(postPart)" class="edit">@T("Edit")</a>
+    }
+    @if (Authorizer.Authorize(Orchard.Core.Contents.Permissions.DeleteContent, postPart.ContentItem) && !postPart.IsParentDepartment())
+    {
+        <a href="@Url.PostDelete(postPart)" class="remove">@T("Delete")</a>
+    }
+</div>

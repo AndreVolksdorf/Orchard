@@ -1,0 +1,52 @@
+﻿@using Orchard.ContentManagement
+@using Orchard.ContentManagement.Aspects
+@using Orchard.Utility.Extensions;
+@{
+    if (Model.Title != null)
+    {
+        Layout.Title = Model.Title;
+    }
+
+    Model.Classes.Add("content-item");
+    Model.Attributes.Add("data-contentitem-id", Model.ContentItem.Id.ToString());
+
+    var contentTypeClassName = ((string)Model.ContentItem.ContentType).HtmlClassify();
+    Model.Classes.Add(contentTypeClassName);
+
+    ContentItem item = Model.ContentItem;
+    ITitleAspect title = item.As<ITitleAspect>();
+
+    var tag = Tag(Model, "article");
+}
+@tag.StartElement
+@Display(Model.Map)
+<h2 class="content-title">@Html.ItemDisplayLink(title.Title, item)</h2>
+
+@if (Model.SubTitle != null)
+{
+    <div class="subtitle">
+        @Display(Model.SubTitle)
+    </div>
+}
+<div class="content">
+    @Display(Model.Content)
+</div>
+@if (Model.Meta != null)
+{
+    <div class="meta">
+        @Display(Model.Meta)
+    </div>
+}
+@if (Model.Tags != null)
+{
+    <div class="tag">
+        @Display(Model.Tags)
+    </div>
+}
+@if (Model.Footer != null)
+{
+    <footer>
+        @Display(Model.Footer)
+    </footer>
+}
+@tag.EndElement

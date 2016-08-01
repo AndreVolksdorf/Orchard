@@ -1,0 +1,18 @@
+@{ Layout.Title = T("New Group").ToString(); }
+
+<ol class="breadcrumb">
+    <li class="active">
+        <span>@T("1. Create group")</span>
+    </li>
+    <li>
+        <span>@T("2. Create department")</span>
+    </li>
+    <li>
+        <span>@T("3. Create post")</span>
+    </li>
+</ol>
+@using (Html.BeginFormAntiForgeryPost()) {
+    @Html.ValidationSummary()
+    // Model is a Shape, calling Display() so that it is rendered using the most specific template for its Shape type
+    @Display(Model)
+}

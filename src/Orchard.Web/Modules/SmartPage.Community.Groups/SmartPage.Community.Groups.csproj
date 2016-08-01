@@ -1,0 +1,429 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1982E7E8-39FC-4A42-88CE-9011416AF527}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SmartPage.Community.Groups</RootNamespace>
+    <AssemblyName>SmartPage.Community.Groups</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\OrchardBasicCorrectness.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets.json" />
+    <Content Include="Assets\Styles.less" />
+    <Content Include="Styles\Styles.css" />
+    <Content Include="Styles\Styles.min.css" />
+    <Content Include="Web.config" />
+    <Content Include="Scripts\Web.config" />
+    <Content Include="Styles\Web.config" />
+    <Content Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Module.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
+      <Project>{2D1D92BB-4555-4CBE-8D0E-63563D6CE4C6}</Project>
+      <Name>Orchard.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Orchard.Core.csproj">
+      <Project>{9916839C-39FC-4CEB-A5AF-89CA7E87119F}</Project>
+      <Name>Orchard.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Autoroute\Orchard.Autoroute.csproj">
+      <Project>{66fccd76-2761-47e3-8d11-b45d0001ddaa}</Project>
+      <Name>Orchard.Autoroute</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Workflows\Orchard.Workflows.csproj">
+      <Project>{7059493c-8251-4764-9c1e-2368b8b485bc}</Project>
+      <Name>Orchard.Workflows</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SmartPage.Community.Roles\SmartPage.Community.Roles.csproj">
+      <Project>{1852d0e4-c39c-4f8b-a587-48df88dac766}</Project>
+      <Name>SmartPage.Community.Roles</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Placement.info">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdminMenu.cs" />
+    <Compile Include="Controllers\GroupAdminController.cs" />
+    <Compile Include="Controllers\GroupController.cs" />
+    <Compile Include="Controllers\InternalFormValueRequiredAttribute.cs" />
+    <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="Controllers\DepartmentAdminController.cs" />
+    <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Drivers\GroupPartDriver.cs" />
+    <Compile Include="Drivers\GroupPostPartDriver.cs" />
+    <Compile Include="Drivers\DepartmentPartDriver.cs" />
+    <Compile Include="Drivers\RecentGroupPostsPartDriver.cs" />
+    <Compile Include="Extensions\Constants.cs" />
+    <Compile Include="Extensions\DynamicZoneExtensions.cs" />
+    <Compile Include="Extensions\UrlHelperExtensions.cs" />
+    <Compile Include="Handlers\GroupPartHandler.cs" />
+    <Compile Include="Handlers\GroupPostPartHandler.cs" />
+    <Compile Include="Handlers\DepartmentPartHandler.cs" />
+    <Compile Include="Handlers\RecentBlogPostsPartHandler.cs" />
+    <Compile Include="Helpers\HierarchyHelpers.cs" />
+    <Compile Include="Migrations.cs" />
+    <Compile Include="Models\DepartmentPartRecord.cs" />
+    <Compile Include="Models\GroupPart.cs" />
+    <Compile Include="Models\GroupPartRecord.cs" />
+    <Compile Include="Models\IDepartmentPart.cs" />
+    <Compile Include="Models\GroupPostPart.cs" />
+    <Compile Include="Models\GroupPostPartRecord.cs" />
+    <Compile Include="Models\DepartmentPart.cs" />
+    <Compile Include="Models\RecentGroupPostsPart.cs" />
+    <Compile Include="Models\RecentGroupPostsPartRecord.cs" />
+    <Compile Include="Permissions.cs" />
+    <Compile Include="ResourceManifest.cs" />
+    <Compile Include="Routes.cs" />
+    <Compile Include="Security\GroupRolesAuthorizationEventHandler.cs" />
+    <Compile Include="Services\DepartmentPostPositional.cs" />
+    <Compile Include="Services\GroupService.cs" />
+    <Compile Include="Services\IDepartmentService.cs" />
+    <Compile Include="Services\IGroupService.cs" />
+    <Compile Include="Services\IPostService.cs" />
+    <Compile Include="Services\PostService.cs" />
+    <Compile Include="Services\DepartmentService.cs" />
+    <Compile Include="Settings\GroupPartSettings.cs" />
+    <Compile Include="Settings\GroupPartSettingsEvents.cs" />
+    <Compile Include="Settings\GroupPostPartSettings.cs" />
+    <Compile Include="Settings\PostSettingsHooks.cs" />
+    <Compile Include="Settings\GroupPostTypePartSettings.cs" />
+    <Compile Include="Shapes.cs" />
+    <Compile Include="ViewModels\PostBodyEditorViewModel.cs" />
+    <Compile Include="ViewModels\DepartmentCloseAdminViewModel.cs" />
+    <Compile Include="ViewModels\DepartmentMoveAdminViewModel.cs" />
+    <Compile Include="ViewModels\DepartmentPager.cs" />
+    <Compile Include="ViewModels\RecentGroupPostsViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\BlockQuoteReply.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Content-Group.Detail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Content-Group.DetailAdmin.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Content-GroupPost.Detail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Content-GroupPost.Summary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Content-Department.Detail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Content-Department.Summary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\DefinitionTemplates\GroupPartSettings.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\DefinitionTemplates\GroupPostPartSettings.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\DefinitionTemplates\GroupPostTypePartSettings.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EditorTemplates\Parts.Groups.Group.Fields.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EditorTemplates\Parts.Departments.Post.Body.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EditorTemplates\Parts.Departments.Department.Fields.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Group\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Group.DeleteButton.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Group.Metadata.First.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Group.Metadata.Latest.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\GroupAdmin\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\GroupAdmin\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\GroupAdmin\Item.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\GroupAdmin\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\GroupAdmin\SelectType.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.Common.Metadata-GroupPost.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.Common.Metadata.Summary-Department.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.Group.Manage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.Groups.Group.Description.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.Groups.Group.GroupReplyCount.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.Groups.Group.GroupDepartmentCount.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.Groups.Group.Manage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.Groups.Group.SummaryAdmin.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.Groups.Department.List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.Groups.Department.ListAdmin.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.Department.Post.Manage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.Department.Manage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.Department.Post.Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.Department.Post.Metadata.SummaryAdmin.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.Department.Posts.Users.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.Departments.Post.Body.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.Departments.Post.Body.Summary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.Departments.Post.List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.Departments.Post.ListAdmin.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.Departments.Department.Closed.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.Departments.Department.Metadata.SummaryAdmin.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.Departments.Department.SummaryAdmin.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.Departments.Department.DepartmentReplyCount.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Post\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Post.Body.Editor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Department\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\DepartmentAdmin\Close.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\DepartmentAdmin\Item.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\DepartmentAdmin\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\DepartmentAdmin\Move.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Group\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Group\SelectType.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Post\SelectType.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EditorTemplates\Parts.Departments.RecentDepartments.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.Departments.RecentDepartments.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\Localization\de-DE\orchard.module.po" />
+    <Content Include="App_Data\Localization\en-US\orchard.module.po" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.Department.Post.Meta.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.Department.Group.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="Views\Parts.Group.Department.Post.Breadcrumb.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Group\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Department\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Post\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.Department.Description.cshtml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" DependsOnTargets="AfterBuildCompiler">
+    <PropertyGroup>
+      <AreasManifestDir>$(ProjectDir)\..\Manifests</AreasManifestDir>
+    </PropertyGroup>
+    <!-- If this is an area child project, uncomment the following line:
+    <CreateAreaManifest AreaName="$(AssemblyName)" AreaType="Child" AreaPath="$(ProjectDir)" ManifestPath="$(AreasManifestDir)" ContentFiles="@(Content)" />
+    -->
+    <!-- If this is an area parent project, uncomment the following lines:
+    <CreateAreaManifest AreaName="$(AssemblyName)" AreaType="Parent" AreaPath="$(ProjectDir)" ManifestPath="$(AreasManifestDir)" ContentFiles="@(Content)" />
+    <CopyAreaManifests ManifestPath="$(AreasManifestDir)" CrossCopy="false" RenameViews="true" />
+    -->
+  </Target>
+  <Target Name="AfterBuildCompiler" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)\..\$(ProjectName)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>45979</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://orchard.codeplex.com</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

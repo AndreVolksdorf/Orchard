@@ -1,0 +1,20 @@
+﻿
+@if (!string.IsNullOrWhiteSpace(Model.Street) || !string.IsNullOrWhiteSpace(Model.StreetNumber) || !string.IsNullOrWhiteSpace(Model.PostalCode) || !string.IsNullOrWhiteSpace(Model.City))
+{
+    <address class="MapCard">
+        <i class="fa fa-home"> </i><dl>
+            @if (!string.IsNullOrWhiteSpace(Model.Name))
+            {
+                <dt>@Display(Model.Name)</dt>
+            }
+            @if (!string.IsNullOrWhiteSpace(Model.Street) || !string.IsNullOrWhiteSpace(Model.StreetNumber))
+            {
+                <dt>@Display(Model.Street) @Display(Model.StreetNumber)</dt>
+            }
+            @if (!string.IsNullOrWhiteSpace(Model.PostalCode) || !string.IsNullOrWhiteSpace(Model.City))
+            {
+                <dt>@Display(Model.PostalCode) @Display(Model.City)</dt>
+            }
+        </dl>
+    </address>
+}

@@ -1,0 +1,206 @@
+﻿@using System.Globalization
+@using System.Web.Mvc.Html
+@model SmartPage.Maps.Models.MapPart
+@{
+    var culture = CultureInfo.CreateSpecificCulture("en-US");
+}
+<fieldset>
+    <legend>@T("Map view")</legend>
+    <p>
+        @Html.Hint(T("Search for an adresse to display marker on maps. You can even search for none specific places (e.g. \"New York\")"))
+    </p>
+    <div class="row">
+        <div class="col-md-6">
+            <div id="locationField" style="position: absolute; z-index: 1; width: 100%; margin: 10px 0; padding: 0 40px 0 10px;">
+                <input id="autocomplete" placeholder="@T("Enter your address")"
+                       onFocus="geolocate()" type="text" />
+            </div>
+            <div id="map" style="height: 347px"></div>
+
+        </div>
+        <div class="col-md-6">
+
+            @Html.HiddenFor(model => model.Latitude)
+            @Html.HiddenFor(model => model.Longitude)
+
+            @Html.LabelFor(model => model.Name, @T("Name or company"))
+            @Html.TextBoxFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+
+            <div class="row">
+                <div class="col-sm-8">
+                    @Html.LabelFor(model => model.City, @T("Street"))
+                    @Html.TextBoxFor(model => model.Street, new { disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.Street)
+                </div>
+                <div class="col-sm-4">
+
+                    @Html.LabelFor(model => model.City, @T("StreetNumber"))
+                    @Html.TextBoxFor(model => model.StreetNumber, new { disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.StreetNumber)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+
+                    @Html.LabelFor(model => model.City, @T("PostalCode"))
+                    @Html.TextBoxFor(model => model.PostalCode, new { disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.PostalCode)
+                </div>
+                <div class="col-sm-8">
+                    @Html.LabelFor(model => model.City, @T("City"))
+                    @Html.TextBoxFor(model => model.City, new { disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.City)
+                </div>
+            </div>
+
+            @Html.LabelFor(model => model.Area, @T("Area"))
+            @Html.TextBoxFor(model => model.Area, new { disabled = "disabled" })
+            @Html.ValidationMessageFor(model => model.Area)
+
+            @Html.LabelFor(model => model.Country, @T("Country"))
+            @Html.TextBoxFor(model => model.Country, new { disabled = "disabled" })
+            @Html.ValidationMessageFor(model => model.Country)
+
+        </div>
+    </div>
+
+    @*
+            <script>
+            function initMap() {
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 8,
+                    center: { lat: @Model.Latitude, lng: @Model.Longitude }
+                });
+                var geocoder = new google.maps.Geocoder();
+
+                document.getElementById('submit').addEventListener('click', function() {
+                    geocodeAddress(geocoder, map);
+                });
+            }
+
+            function geocodeAddress(geocoder, resultsMap) {
+                var address = document.getElementById('MapPart_Street').value + ' ' + document.getElementById('MapPart_City').value;
+                geocoder.geocode({ 'address': address }, function(results, status) {
+                    if (status === google.maps.GeocoderStatus.OK) {
+                        resultsMap.setCenter(results[0].geometry.location);
+                        var adress = document.getElementById('MapPart_Address');
+                        adress.value = results[0].formatted_address;
+                        var lon = document.getElementById('MapPart_Longitude');
+                        lon.value = results[0].geometry.location.lng();
+                        lon.value = lon.value.replace('.', ',').replace(' ', '');
+                        var lat = document.getElementById('MapPart_Latitude');
+                        lat.value = results[0].geometry.location.lat();
+                        lat.value = lat.value.replace('.', ',').replace(' ', '');
+                        var marker = new google.maps.Marker({
+                            map: resultsMap,
+                            position: results[0].geometry.location
+                        });
+                    } else {
+                        alert('Geocode was not successful for the following reason: ' + status);
+                    }
+                });
+            }
+        </script>
+
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfBRWEkaLtJaRwiltCag8hNHFKmGxZd7s&callback=initMap">
+        </script>*@
+
+    <script>
+        // This example displays an address form, using the autocomplete feature
+        // of the Google Places API to help users fill in the information.
+
+        var placeSearch, autocomplete,map;
+        var componentForm = {
+            street_number: ['short_name','@Html.IdFor(model => model.StreetNumber)'],
+            route: ['long_name','@Html.IdFor(model => model.Street)'],
+            locality:[ 'long_name','@Html.IdFor(model => model.City)'],
+            administrative_area_level_1: ['long_name','@Html.IdFor(model => model.Area)'],
+            country:[ 'long_name','@Html.IdFor(model => model.Country)'],
+            postal_code: ['short_name','@Html.IdFor(model => model.PostalCode)']
+        };
+
+        function initAutocomplete(){
+            // Create the autocomplete object, restricting the search to geographical
+            // location types.
+            autocomplete = new google.maps.places.Autocomplete(
+                /** type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+                { types: ['geocode'] });
+
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 8,
+                disableDefaultUI: true,
+                center: { lat: @Model.Latitude.ToString("R", culture), lng: @Model.Longitude.ToString("R", culture) }
+            });
+            var geocoder = new google.maps.Geocoder();
+
+            // When the user selects an address from the dropdown, populate the address
+            // fields in the form.
+            autocomplete.addListener('place_changed', fillInAddress);
+            for (var i in componentForm) {
+                if(document.getElementById(componentForm[i][1]).value != ""){
+                    document.getElementById(componentForm[i][1]).disabled = false;
+                }
+            }
+
+        }
+
+        // [START region_fillform]
+        function fillInAddress() {
+            // Get the place details from the autocomplete object.
+            var place = autocomplete.getPlace();
+            map.setCenter(place.geometry.location);
+
+            var marker = new google.maps.Marker({
+                map: map,
+                position: place.geometry.location
+            });
+
+            var lon = document.getElementById('MapPart_Longitude');
+            lon.value = place.geometry.location.lng();
+            lon.value = lon.value.replace('.', ',').replace(' ', '');
+            var lat = document.getElementById('MapPart_Latitude');
+            lat.value = place.geometry.location.lat();
+            lat.value = lat.value.replace('.', ',').replace(' ', '');
+
+
+            // Get each component of the address from the place details
+            // and fill the corresponding field on the form.
+            for (var i = 0; i < place.address_components.length; i++) {
+                var addressType = place.address_components[i].types[0];
+                if (componentForm[addressType]) {
+                    var val = place.address_components[i][componentForm[addressType][0]];
+                    document.getElementById(componentForm[addressType][1]).value = val;
+                    document.getElementById(componentForm[addressType][1]).disabled = false;
+                }
+            }
+        }
+        // [END region_fillform]
+
+        // [START region_geolocation]
+        // Bias the autocomplete object to the user's geographical location,
+        // as supplied by the browser's 'navigator.geolocation' object.
+        function geolocate() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var geolocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    var circle = new google.maps.Circle({
+                        center: geolocation,
+                        radius: position.coords.accuracy
+                    });
+                    autocomplete.setBounds(circle.getBounds());
+                });
+            }
+        }
+        // [END region_geolocation]
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfBRWEkaLtJaRwiltCag8hNHFKmGxZd7s&libraries=places&callback=initAutocomplete"
+            async defer></script>
+
+</fieldset>

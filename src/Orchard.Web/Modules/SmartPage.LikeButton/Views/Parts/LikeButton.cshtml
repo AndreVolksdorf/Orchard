@@ -1,0 +1,25 @@
+﻿@using Orchard.Utility.Extensions;
+@{
+    bool userCanRate = Request.IsAuthenticated;
+}
+<div class="favorite-rating">
+    @if (userCanRate)
+    {
+        using (Html.BeginFormAntiForgeryPost(Url.Action("Apply", "Like", new { area = "SmartPage.LikeButton" }), FormMethod.Post, new { @class = "rate" }))
+        {
+            if (Model.IsFavorite)
+            {
+                <button class="favorite marked-as-favorite" type="submit" value="true">@Model.UnlikeButtonText</button>
+            }
+            else
+            {
+                <button class="favorite notmarked-as-favorite" type="submit" value="true">@Model.LikeButtonText</button>
+            }
+            <div class="favorite-current-result">
+                <span class="favorite-count">@Model.Value</span>
+            </div>
+            @Html.Hidden("contentId", (int)Model.ContentItem.Id)
+            @Html.Hidden("ReturnUrl", Context.Request.ToUrlString())
+        }
+    }
+</div>

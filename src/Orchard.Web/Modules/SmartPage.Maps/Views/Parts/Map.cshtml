@@ -1,0 +1,148 @@
+﻿@using System.Drawing
+@using SmartPage.Maps.MapControl
+@using SmartPage.Maps.MapControl.MapType.StyledMapType.Styles
+@{
+    int height = 100;
+    int.TryParse(Model.Height, out height);
+}
+@{
+    Script.Include("https://maps.googleapis.com/maps/api/js?").AtHead();
+    Script.Require("maps").AtHead();
+    Html.GoogleMap()
+        .Name(string.Concat("map", (string)Model.Id))
+        .Height(height)
+        .Draggable(false)
+        .DisableDoubleClickZoom(true)
+        .ZoomControlVisible(false)
+        .PanControlVisible(false)
+        .StreetViewControlVisible(false)
+        .Zoom(16)
+        .MapTypeControlVisible(false)
+        .StyledMapTypes(map =>
+            map.Add()
+           .Styles(style =>
+           {
+               style.Add()
+                   .ElementType(ElementType.LabelsTextFill)
+                   .FeatureType(FeatureType.All)
+                   .Visibility(MapTypeStylerVisibility.On)
+                   .Saturation(36)
+                   .Lightness(40)
+                   .Color(ColorTranslator.FromHtml("#333333"));
+               style.Add()
+                   .ElementType(ElementType.LabelsTextStroke)
+                   .FeatureType(FeatureType.All)
+                   .Visibility(MapTypeStylerVisibility.On)
+                   .Lightness(16)
+                   .Color(ColorTranslator.FromHtml("#ffffff"));
+               style.Add()
+                   .ElementType(ElementType.GeometryFill)
+                   .FeatureType(FeatureType.Administrative)
+                   .Lightness(20)
+                   .Color(ColorTranslator.FromHtml("#fefefe"));
+               style.Add()
+                   .ElementType(ElementType.GeometryStroke)
+                   .FeatureType(FeatureType.Administrative)
+                   .Lightness(17)
+                   .Weight((float)1.2)
+                   .Color(ColorTranslator.FromHtml("#f5f5f5"));
+               style.Add()
+                   .ElementType(ElementType.Geometry)
+                   .FeatureType(FeatureType.Landscape)
+                   .Lightness(20)
+                   .Color(ColorTranslator.FromHtml("#f5f5f5"));
+               style.Add()
+                   .ElementType(ElementType.Geometry)
+                   .FeatureType(FeatureType.Poi)
+                   .Lightness(21)
+                   .Color(ColorTranslator.FromHtml("#f5f5f5"));
+               style.Add()
+                   .ElementType(ElementType.Geometry)
+                   .FeatureType(FeatureType.PoiPark)
+                   .Lightness(21)
+                   .Color(ColorTranslator.FromHtml("#dedede"));
+               style.Add()
+                   .ElementType(ElementType.GeometryFill)
+                   .FeatureType(FeatureType.RoadHighway)
+                   .Lightness(17)
+                   .Color(ColorTranslator.FromHtml("#d7d7b9"));
+               style.Add()
+                   .ElementType(ElementType.GeometryStroke)
+                   .FeatureType(FeatureType.RoadHighway)
+                   .Lightness(29)
+                   .Weight((float)0.2)
+                   .Color(ColorTranslator.FromHtml("#ffffff"));
+               style.Add()
+                   .ElementType(ElementType.Geometry)
+                   .FeatureType(FeatureType.RoadArterial)
+                   .Lightness(18)
+                   .Color(ColorTranslator.FromHtml("#ffffff"));
+               style.Add()
+                   .ElementType(ElementType.Geometry)
+                   .FeatureType(FeatureType.RoadLocal)
+                   .Lightness(19)
+                   .Color(ColorTranslator.FromHtml("#ffffff"));
+               style.Add()
+                   .ElementType(ElementType.Geometry)
+                   .FeatureType(FeatureType.Transit)
+                   .Lightness(16)
+                   .Color(ColorTranslator.FromHtml("#f2f2f2"));
+               style.Add()
+                   .FeatureType(FeatureType.TransitLine)
+                   .ElementType(ElementType.All)
+                   .Visibility(MapTypeStylerVisibility.Off);
+               style.Add()
+                   .FeatureType(FeatureType.TransitStationBus)
+                   .ElementType(ElementType.All)
+                   .Visibility(MapTypeStylerVisibility.On);
+               style.Add()
+                   .FeatureType(FeatureType.TransitStationRail)
+                   .ElementType(ElementType.All)
+                   .Visibility(MapTypeStylerVisibility.On);
+               style.Add()
+                   .ElementType(ElementType.Geometry)
+                   .FeatureType(FeatureType.Water)
+                   .Lightness(17)
+                   .Color(ColorTranslator.FromHtml("#7e9bdd"));
+           })
+           .MapTypeName("Custom Style")
+        )
+.MapTypeId("Custom Style")
+.Center(c =>
+{
+    if (Model.Address != null)
+    {
+        c.Address(Model.Address);
+    }
+    else if (Model.Latitude != null && Model.Longitude != null)
+    {
+                //this will be the Latitude if your map do not support
+                //geolocation or the client denies the location sharing
+                c.Latitude(Model.Latitude);
+                //this will be the Longitude if your map do not support
+                //geolocation or the client denies the location sharing
+                c.Longitude(Model.Longitude);
+    }
+}
+)
+.Markers(m => m.Add()
+.Title("Hello Geolocation!")
+.Icon("/Themes/SmartPage.Themes.Zukunftsstadt/Content/Map_Icon.png")
+.Window(window => window.Add()
+    .MaxWidth(200)
+    .ZIndex(7)
+    .DisableAutoPan(false)
+    .Content(@<text><div>
+            <h1>Geolocation</h1>
+            <div id="bodyContent">
+                <p>
+                    This marker is placed in your current location if your browser support Geolocation and you have allowed the location sharing, otherwise it is placed in the map default location.
+                </p>
+
+            </div>
+        </div></text>
+        )
+    )
+).Render();
+}
+@*@(Html.GoogleMap().ScriptRegistrar())*@

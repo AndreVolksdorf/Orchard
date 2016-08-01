@@ -1,0 +1,34 @@
+@using Orchard.Core.Title.Models
+@using SmartPage.Community.Groups.Extensions
+@using SmartPage.Community.Groups.Helpers
+@using SmartPage.Community.Groups.Models
+@{
+    Layout.Title = T("Edit department").ToString();
+    GroupPart groupPart = HierarchyHelpers.GetGroup(Model.ContentItem);
+    DepartmentPart departmentPart = HierarchyHelpers.GetDepartmentPart(Model.ContentItem);
+}
+
+<h2>@Layout.Title</h2>
+
+<ol class="breadcrumb">
+    <li>
+        <a href="@Url.GroupEdit(groupPart)" class="edit">1. @groupPart.Title <i class="fa fa-check"> </i></a>
+    </li>
+    <li class="active">
+        <span>@T("2. Edit department")</span>
+    </li>
+    <li>
+        @if (!departmentPart.IsClosed) {
+            <a href="@Url.PostCreate(departmentPart)" class="create">@T("Create post")</a>
+        }
+        else {
+            <span>@T("3. Department closed")</span>
+        }
+    </li>
+</ol>
+@using (Html.BeginFormAntiForgeryPost())
+{
+    @Html.ValidationSummary()
+    // Model is a Shape, calling Display() so that it is rendered using the most specific template for its Shape type
+    @Display(Model)
+}

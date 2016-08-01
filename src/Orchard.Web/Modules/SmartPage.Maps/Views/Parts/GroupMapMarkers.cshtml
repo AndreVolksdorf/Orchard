@@ -1,0 +1,144 @@
+﻿@using System.Drawing
+@using SmartPage.Maps.MapControl
+@using SmartPage.Maps.MapControl.MapType.StyledMapType.Styles
+@using SmartPage.Maps.MapControl.Objects.InfoWindow
+@using SmartPage.Maps.MapControl.Objects.Markers
+@using SmartPage.Maps.ViewModels
+@{
+    int height = 100;
+    IEnumerable<MarkerInfo> markers = (IEnumerable<MarkerInfo>)Model.Markers;
+}
+@{
+    Script.Include("https://maps.googleapis.com/maps/api/js?").AtHead();
+    Script.Require("maps").AtHead();
+    var mapBuilder = Html.GoogleMap()
+        .Name(string.Concat("maps", (string)Model.Id))
+        .Height((int)Model.Height)
+        .FitToMarkersBounds(true)
+        .Center(center => { center.Latitude(markers.FirstOrDefault().Latitude).Longitude(markers.FirstOrDefault().Longitude); })
+        .MapTypeControlVisible(false)
+        .StyledMapTypes(map =>
+            map.Add()
+                .Styles(style =>
+                {
+                    style.Add()
+                        .ElementType(ElementType.All)
+                        .FeatureType(FeatureType.PoiBusiness)
+                        .Visibility(MapTypeStylerVisibility.Off);
+                    style.Add()
+                        .ElementType(ElementType.LabelsTextFill)
+                        .FeatureType(FeatureType.All)
+                        .Visibility(MapTypeStylerVisibility.On)
+                        .Saturation(36)
+                        .Lightness(40)
+                        .Color(ColorTranslator.FromHtml("#333333"));
+                    style.Add()
+                        .ElementType(ElementType.LabelsTextStroke)
+                        .FeatureType(FeatureType.All)
+                        .Visibility(MapTypeStylerVisibility.On)
+                        .Lightness(16)
+                        .Color(ColorTranslator.FromHtml("#ffffff"));
+                    style.Add()
+                        .ElementType(ElementType.GeometryFill)
+                        .FeatureType(FeatureType.Administrative)
+                        .Lightness(20)
+                        .Color(ColorTranslator.FromHtml("#fefefe"));
+                    style.Add()
+                        .ElementType(ElementType.GeometryStroke)
+                        .FeatureType(FeatureType.Administrative)
+                        .Lightness(17)
+                        .Weight((float)1.2)
+                        .Color(ColorTranslator.FromHtml("#f5f5f5"));
+                    style.Add()
+                        .ElementType(ElementType.Geometry)
+                        .FeatureType(FeatureType.Landscape)
+                        .Lightness(20)
+                        .Color(ColorTranslator.FromHtml("#f5f5f5"));
+                    style.Add()
+                        .ElementType(ElementType.Geometry)
+                        .FeatureType(FeatureType.Poi)
+                        .Lightness(21)
+                        .Color(ColorTranslator.FromHtml("#f5f5f5"));
+                    style.Add()
+                        .ElementType(ElementType.Geometry)
+                        .FeatureType(FeatureType.PoiPark)
+                        .Lightness(21)
+                        .Color(ColorTranslator.FromHtml("#dedede"));
+                    style.Add()
+                        .ElementType(ElementType.GeometryFill)
+                        .FeatureType(FeatureType.RoadHighway)
+                        .Lightness(17)
+                        .Color(ColorTranslator.FromHtml("#d7d7b9"));
+                    style.Add()
+                        .ElementType(ElementType.GeometryStroke)
+                        .FeatureType(FeatureType.RoadHighway)
+                        .Lightness(29)
+                        .Weight((float)0.2)
+                        .Color(ColorTranslator.FromHtml("#ffffff"));
+                    style.Add()
+                        .ElementType(ElementType.Geometry)
+                        .FeatureType(FeatureType.RoadArterial)
+                        .Lightness(18)
+                        .Color(ColorTranslator.FromHtml("#ffffff"));
+                    style.Add()
+                        .ElementType(ElementType.Geometry)
+                        .FeatureType(FeatureType.RoadLocal)
+                        .Lightness(19)
+                        .Color(ColorTranslator.FromHtml("#ffffff"));
+                    style.Add()
+                        .ElementType(ElementType.Geometry)
+                        .FeatureType(FeatureType.Transit)
+                        .Lightness(16)
+                        .Color(ColorTranslator.FromHtml("#f2f2f2"));
+                    style.Add()
+                        .FeatureType(FeatureType.TransitLine)
+                        .ElementType(ElementType.All)
+                        .Visibility(MapTypeStylerVisibility.Off);
+                    style.Add()
+                        .FeatureType(FeatureType.TransitStationBus)
+                        .ElementType(ElementType.All)
+                        .Visibility(MapTypeStylerVisibility.On);
+                    style.Add()
+                        .FeatureType(FeatureType.TransitStationRail)
+                        .ElementType(ElementType.All)
+                        .Visibility(MapTypeStylerVisibility.On);
+                    style.Add()
+                        .ElementType(ElementType.Geometry)
+                        .FeatureType(FeatureType.Water)
+                        .Lightness(17)
+                        .Color(ColorTranslator.FromHtml("#7e9bdd"));
+                })
+                .MapTypeName("Custom Style")
+        )
+        .MapTypeId("Custom Style")
+        .BindTo<MarkerInfo, Marker>(markers, mappings => mappings.For<MarkerInfo>
+            (
+                binding => binding.ItemDataBound
+                    (
+                        (marker, regionInfo) =>
+                        {
+                            marker.Longitude = regionInfo.Longitude;
+                            marker.Latitude = regionInfo.Latitude;
+                            marker.Title = regionInfo.Title;
+                            marker.ZIndex = regionInfo.ZIndex;
+                            marker.Window = new InfoWindow(marker)
+                            {
+                                Template = {
+                                    Content = () => ViewContext.Writer.Write(@"
+    <div class=""window-content"">
+        <h4>{0}</h4>
+        <div class=""bodyContent"">
+            {1}
+        </div>
+    </div>
+                                    </text>", regionInfo.Title, regionInfo.InfoWindowContent)
+                                }
+                            };
+                        }
+                    )
+            )
+        )
+        .FitToMarkersBounds(true);
+    mapBuilder.Render();
+}
+@*@(Html.GoogleMap().ScriptRegistrar())*@
