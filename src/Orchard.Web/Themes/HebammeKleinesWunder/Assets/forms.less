@@ -1,0 +1,123 @@
+﻿fieldset {
+    background: #ffffff none repeat scroll 0 0;
+    border: 0 none;
+    min-width: 0;
+    padding: 15px;
+
+    > div {
+        .form-group;
+    }
+}
+
+
+ul.tagit,
+input[type="color"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="file"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="range"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"],
+select,
+textarea {
+    .form-control;
+}
+
+textarea {
+    height: auto; // to override the form-control height
+}
+
+button {
+    .btn;
+    .btn-default;
+}
+
+.button-cancel {
+    .btn;
+    .btn-link;
+}
+
+button.primaryAction {
+    .btn-primary;
+}
+
+fieldset.save-button {
+    margin: 10px 0 15px 0;
+}
+
+.pager {
+    .pagination;
+}
+
+html.orchard-users {
+    form {
+        .make-row;
+
+        fieldset {
+            .make-md-column(6);
+        }
+    }
+}
+
+.hint {
+    .help-block;
+}
+
+.field-validation-error {
+    .help-block;
+    color: @brand-danger;
+}
+
+.note-toolbar.btn-toolbar {
+    margin-left: 0;
+}
+
+.forcheckbox {
+    min-height: @line-height-computed; // Ensure the input doesn't jump when there is no text
+    padding-left: 20px;
+    margin-bottom: 0;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.check-box {
+    position: absolute;
+    margin-left: -20px;
+    margin-top: 4px \9;
+}
+
+
+ul.tagit {
+
+    input[type="text"] {
+        box-shadow: none;
+        height: auto;
+    }
+
+    li.tagit-choice {
+        left: -8px;
+        position: relative;
+        top: -2px;
+        background: @btn-primary-bg;
+        color: @btn-primary-color;
+        border-color: @btn-primary-border;
+
+        a.tagit-close {
+            color: @btn-primary-color;
+            text-shadow: none;
+        }
+    }
+}
+/* RTL Support */
+html.orchard-users.rtl form fieldset {
+    float: right;
+}

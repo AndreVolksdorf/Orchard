@@ -1,0 +1,172 @@
+<Placement>
+  <Place Parts_Common_Metadata="-"/>
+
+  <Match DisplayType="Summary">
+  </Match>
+  <Match DisplayType="Detail">
+    <Place Parts_Title="/AfterNavigation:0"/>
+  </Match>
+
+  <Match ContentType="Thread">
+    <Match DisplayType="Summary">
+      <Place Fields_TaxonomyField="Tags:0"/>
+      <Place Fields_TaxonomyField-Themenfelder="Meta:8"/>
+    </Match>
+    <Match DisplayType="Detail">
+      <Place Fields_TaxonomyField="-"/>
+      <Place Fields_TaxonomyField-Themenfelder="/AfterNavigation:1"/>
+    </Match>
+  </Match>
+
+  <Match ContentType="ThemenfelderTerm">
+    <Match DisplayType="Detail">
+      <Place Parts_Common_Metadata="-"/>
+    </Match>
+    <Match DisplayType="Summary">
+      <Place Parts_Common_Metadata="-"/>
+    </Match>
+  </Match>
+  <Match ContentType="StadtteileTerm">
+    <Match DisplayType="Detail">
+      <Place Parts_Common_Metadata="-"/>
+    </Match>
+    <Match DisplayType="Summary">
+      <Place Parts_Common_Metadata="-"/>
+    </Match>
+  </Match>
+
+
+  <Match ContentType="Forum">
+    <Match DisplayType="Detail">
+      <Place Parts_Common_Metadata="-"
+             Parts_Title="-"
+             Parts_Forums_Thread_List="Content"
+             Parts_Forums_Forum_Description="Meta:1"
+             Parts_Forum_Manage="/BeforeMainActions:1"/>
+    </Match>
+    <Match DisplayType="Summary">
+      <Place Parts_Forums_Forum_Description="Content:before"
+             Parts_Forums_Forum_ForumReplyCount="Meta:3"
+             Parts_Forums_Forum_ForumThreadCount="Meta:4"/>
+    </Match>
+  </Match>
+
+  <Match ContentType="Thread">
+    <Match DisplayType="Detail">
+      <Place Parts_Common_Metadata="-"
+             Parts_Thread_Manage="Actions:1"
+             Parts_Threads_Thread_Closed="Meta:1"
+             Parts_LikeButton="/BeforeMainActions:9"/>
+    </Match>
+    <Match DisplayType="Summary">
+      <Place Forum_Metadata_First="Content:0"
+             Parts_LikeCounter="Footer:0"
+             Parts_Threads_Thread_ThreadReplyCount="Footer:1"
+             Forum_Metadata_Latest="Footer:2"
+             Parts_Common_Metadata="-"/>
+    </Match>
+    <Match DisplayType="SummaryAdmin">
+      <Place Parts_Threads_Thread_SummaryAdmin="Actions:10"
+             Parts_Threads_Thread_Metadata_SummaryAdmin="Meta:1.3"/>
+    </Match>
+  </Match>
+
+  <Match ContentType="Group">
+    <Match DisplayType="Detail">
+      <Place Parts_Common_Metadata="-"
+             Parts_Groups_Department_List="Content"
+             Parts_Group_Manage="/BeforeMainActions:1"
+             Parts_Title="/BeforeMain:0"
+             Parts_MapCard="/BeforeMainSide:0"
+             Parts_Contact="/BeforeMainSide:1"
+             Fields_TaxonomyField="/BeforeMain:1"
+             Parts_Groups_Group_Description="/BeforeMain:2"
+             Fields_MediaLibraryPicker="-"/>
+    </Match>
+    <Match DisplayType="Summary">
+      <Place Fields_MediaLibraryPicker="Map:0"
+             Parts_Map="-"
+             Parts_Groups_Group_GroupDepartmentCount="Footer:1"
+             Parts_Groups_Group_GroupReplyCount="Footer:2"
+             Parts_Common_Metadata_Summary="-"
+             Fields_TaxonomyField="SubTitle:0"
+             Parts_Common_Metadata="-"/>
+    </Match>
+  </Match>
+
+  <Match ContentType="Department">
+    <Match DisplayType="Summary">
+      <Place Fields_MediaLibraryPicker="Map:0"
+             Parts_Common_Metadata="-"
+             Parts_Department_Group="SubTitle:0"
+             Fields_TaxonomyField="SubTitle:1"
+             Fields_TaxonomyField-Stadtteile="-"
+             Group_Metadata_First="-"
+             Group_Metadata_Latest="Footer:1"
+             Parts_Common_Metadata_Summary="-"
+             Parts_Map="-"
+             Parts_Departments_Department_DepartmentReplyCount="Footer:1"
+             Parts_LikeCounter="Footer:0"/>
+    </Match>
+    <Match DisplayType="Detail">
+      <Place Parts_Common_Metadata="-"
+             Parts_Department_Description="/BeforeMain:2"
+             Parts_Department_Group="/AfterNavigation:2"
+             Parts_Department_Manage="/BeforeMainActions:1"
+             Parts_LikeButton="/BeforeMainActions:9"
+             Fields_MediaLibraryPicker="BeforeMainSide:0"
+             Parts_MapCard="/BeforeMainSide:0"
+             Parts_Contact="/BeforeMainSide:1"
+             Fields_TaxonomyField-Themenfelder="/AfterNavigation:3"
+             Fields_TaxonomyField-Stadtteile="-"/>
+    </Match>
+  </Match>
+
+  <Match ContentType="GroupEvent">
+    <Match DisplayType="Summary">
+      <Place Parts_Common_Metadata="-"
+             Parts_Comments_Count="-"
+             Fields_TaxonomyField="SubTitle:0"
+             Fields_DateTime="Dates:0"
+             Parts_Layout_Summary="-"
+             Parts_Map="-"
+             Parts_MapCard="Meta:0"
+             Parts_Contact="Meta:1"
+             Parts_Common_Metadata_Summary="-"
+             Parts_CalendarEventDefinition_Summary="Map:5"/>
+    </Match>
+    <Match DisplayType="Detail">
+      <Place Parts_Common_Metadata="-"
+             Parts_Common_Metadata_Summary="-"
+             Fields_TaxonomyField="SubTitle:0"
+             Fields_DateTime="Dates:0"
+             Parts_Comments_Count="Comments:3"
+             Parts_Layout_Summary="-"
+             Parts_Map="-"
+             Parts_MapCard="Content:10"
+             Parts_Contact="Meta:1"
+             Parts_CalendarEventDefinition_Summary="Map:5"
+             Parts_Department_Post_Meta="/AfterNavigation:1"
+             Parts_Department_Post_Manage="/BeforeMainActions:1"/>
+    </Match>
+    <Match DisplayType="SummaryAdmin">
+      <Place Parts_Department_Post_Metadata_SummaryAdmin="Meta:1.2"/>
+    </Match>
+  </Match>
+
+  <Match ContentType="GroupPost">
+    <Match DisplayType="Detail">
+      <Place Parts_Department_Post_Manage="/BeforeMainActions:1"
+             Parts_Department_Post_Meta="/AfterNavigation:1"
+             Parts_Image_Summary="Content:after"/>
+    </Match>
+    <Match DisplayType="Summary">
+      <Place Parts_Comments_Count="-"
+             Parts_Image_Summary="Content:after"/>
+    </Match>
+
+    <Match DisplayType="SummaryAdmin">
+      <Place Parts_Department_Post_Metadata_SummaryAdmin="Meta:1.2"/>
+    </Match>
+  </Match>
+</Placement>

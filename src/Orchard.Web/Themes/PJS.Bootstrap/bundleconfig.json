@@ -1,0 +1,26 @@
+[
+  {
+    "outputFileName": "Scripts/bootstrap-datetimepicker.js",
+    "inputFiles": [
+      "Scripts/bootstrap-datetimepicker.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/custom.js",
+    "inputFiles": [
+      "Scripts/custom.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/equalize.js",
+    "inputFiles": [
+      "Scripts/equalize.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/hover-dropdown.js",
+    "inputFiles": [
+      "Scripts/hover-dropdown.js"
+    ]
+  }
+]

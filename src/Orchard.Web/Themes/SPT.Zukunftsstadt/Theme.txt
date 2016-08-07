@@ -1,0 +1,10 @@
+Name: SPT.Zukunftsstadt
+Author: The Orchard Team
+Website: http://www.orchardproject.net
+Description: Description for the theme
+Version: 1.0
+BaseTheme: PJS.Bootstrap
+# todo: provide tags
+# Tags: Bootstrap, Serif
+Dependencies:  SmartPage.Community.Roles, SmartPage.Community.Groups, SmartPage.Maps
+Zones: Header, Navigation, AfterNavigation,Featured, BeforeMain, BeforeMainActions, AsideFirst, Messages, BeforeContent, Content, AfterContent, AsideSecond, AfterMain, TripelFirst, TripelSecond, TripelThird, FooterQuadFirst, FooterQuadSecond, FooterQuadThird, FooterQuadFourth, Footer, SearchColumn1, SearchColumn2, SearchColumn3

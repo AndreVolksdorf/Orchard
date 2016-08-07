@@ -1,0 +1,34 @@
+﻿@using NGM.Forum.Models
+@using Orchard.ContentManagement
+@using Orchard.ContentManagement.Aspects
+@using Orchard.Utility.Extensions;
+@{
+    if (Model.Title != null)
+    {
+        Layout.Title = Model.Title;
+    }
+
+    Model.Classes.Add("content-item");
+    Model.Attributes.Add("id", Model.ContentItem.Id.ToString());
+
+    var contentTypeClassName = ((string)Model.ContentItem.ContentType).HtmlClassify();
+    ContentItem item = Model.ContentItem;
+    ITitleAspect title = item.As<ITitleAspect>();
+    Model.Classes.Add("col-sm-12 forum-thread");
+
+    var tag = Tag(Model, "article");
+
+}
+@tag.StartElement
+<h2 class="content-title">@Html.ItemDisplayLink(title.Title, item)</h2>
+<div class="meta">
+    @Display(Model.Meta)
+</div>
+@Display(Model.Content)
+@if (Model.Footer != null)
+{
+    <footer>
+        @Display(Model.Footer)
+    </footer>
+}
+@tag.EndElement

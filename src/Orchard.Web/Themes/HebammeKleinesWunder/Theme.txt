@@ -1,0 +1,8 @@
+Name: Hebammen Kleines Wunder
+Author: SmartPage Webdesign
+Website: http://www.smartpage.de
+Description: Description for the theme
+Version: 1.0
+BaseTheme: PJS.Bootstrap
+# todo: provide tags
+# Tags: Classic, Serif

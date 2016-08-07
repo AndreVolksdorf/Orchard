@@ -1,0 +1,61 @@
+﻿@using Orchard.Comments.Models
+@using Orchard.ContentManagement
+@using Orchard.Core.Common.Models
+@using Orchard.Users.Models
+@using SmartPage.Themes.Zukunftsstadt.Gravatar
+@using SmartPage.Themes.Zukunftsstadt.Gravatar.Html
+@using Orchard.Utility.Extensions;
+@{
+    if (Model.Title != null)
+    {
+        Layout.Title = Model.Title;
+    }
+
+    Model.Classes.Add("content-item");
+
+    var contentTypeClassName = ((string)Model.ContentItem.ContentType).HtmlClassify();
+    Model.Classes.Add(contentTypeClassName);
+
+    var tag = Tag(Model, "article");
+}
+<li class="media">
+    <a class="pull-left" href="#">
+        @{
+            string gravatarEmail = string.Empty;
+
+            if (Model.ContentPart.Owner.UserName != null)
+            {
+                gravatarEmail = Model.ContentPart.Owner.Email;
+            }
+            else {
+                string userName = Model.ContentPart.Owner.UserName;
+                var cm = WorkContext.Resolve<IContentManager>();
+                var user = cm.Query<UserPart, UserPartRecord>
+                    ().Where(x => x.NormalizedUserName == userName).List().FirstOrDefault();
+
+                if (user != null)
+                {
+                    gravatarEmail = user.Email;
+                }
+            }
+
+            var gravatarUrl = Url.Gravatar(string.IsNullOrWhiteSpace(gravatarEmail) ? "dummy@foobar.com" : gravatarEmail, 128, "mm", Rating.G);
+        }
+
+        <img src="@gravatarUrl" alt="@T(" Gravatar Image")" class="media-object img-circle" />
+    </a>
+    <div class="media-body">
+        <div class="well well-lg">
+            @Display(Model.Meta)
+            <p class="media-Kommentar">
+                @Display(Model.Content)
+            </p>
+            @if (Model.Actions != null)
+            {
+                <div class="actions">
+                    @Display(Model.Actions)
+                </div>
+            }
+        </div>
+    </div>
+</li>

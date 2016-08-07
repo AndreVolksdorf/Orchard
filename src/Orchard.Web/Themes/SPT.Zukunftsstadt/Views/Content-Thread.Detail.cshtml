@@ -1,0 +1,38 @@
+﻿@using Orchard.Utility.Extensions;
+@{
+    if (Model.Title != null)
+    {
+        Layout.Title = Model.Title;
+    }
+
+    Model.Classes.Add("content-item");
+
+    var contentTypeClassName = ((string)Model.ContentItem.ContentType).HtmlClassify();
+    Model.Classes.Add(contentTypeClassName);
+
+    var tag = Tag(Model, "article");
+}
+@tag.StartElement
+<header class="row">
+    <div class="col-md-2" style="padding: 20px;">
+        @Display(Model.Tags)
+    </div>
+    <div class="col-md-10">
+
+        @Display(Model.Header)
+        @if (Model.Meta != null)
+        {
+            <div class="metadata">
+                @Display(Model.Meta)
+            </div>
+        }
+    </div>
+</header>
+@Display(Model.Content)
+@if (Model.Footer != null)
+{
+    <footer>
+        @Display(Model.Footer)
+    </footer>
+}
+@tag.EndElement

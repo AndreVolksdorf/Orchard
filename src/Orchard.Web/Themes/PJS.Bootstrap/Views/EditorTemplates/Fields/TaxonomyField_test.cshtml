@@ -1,0 +1,36 @@
+﻿@model TaxonomyFieldViewModel
+@using Orchard.Taxonomies.Helpers;
+@using Orchard.Utility.Extensions;
+@using Orchard.Taxonomies.ViewModels;
+
+@{
+    Script.Require("jQuery");
+
+    int termIndex = 0;
+    var settings = Model.Settings;
+}
+
+<fieldset class="multiselect-wrapper" data-name-prefix="@Html.FieldNameFor(m => m)" data-id-prefix="@Html.FieldIdFor(m => m)">
+    <legend @if (settings.Required) { <text> class="required" </text>    }>@Model.DisplayName</legend>
+    <select id="@Html.IdFor(m => m)" @if (!Model.Settings.SingleChoice) { <text> multiple="multiple" </text> }>
+
+        @foreach (var entry in Model.Terms)
+        {
+            if (!(!entry.Selectable || (Model.Settings.LeavesOnly && Model.Terms.Any(t => t.Path.Contains(entry.Path + entry.Id)))))
+            {
+                var ti = termIndex;
+                <option value="@Model.Terms[ti].Id" @if (entry.IsChecked) {
+                                                        <text> selected="selected" </text>
+                                                    }>
+                    @* Tabs for levels *@ @for (var i = 1; i <= entry.GetLevels(); i++) {
+                                              <text>&nbsp;</text>
+                                          }@entry.Name
+                </option>
+            }
+        }
+    </select>
+    @if (!String.IsNullOrWhiteSpace(Model.Settings.Hint))
+    {
+        <span class="hint">@Model.Settings.Hint</span>
+    }
+</fieldset>

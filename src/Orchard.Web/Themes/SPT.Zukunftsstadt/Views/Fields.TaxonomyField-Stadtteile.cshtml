@@ -1,0 +1,14 @@
+﻿@using Orchard.Utility.Extensions;
+@{
+    var terms = (IEnumerable<Orchard.Taxonomies.Models.TermPart>)Model.Terms;
+    var classes = string.Empty;
+    if (terms.Any())
+    {
+        classes = string.Join(" ", terms.Select(t => Orchard.Utility.Extensions.StringExtensions.HtmlClassify(t.Name)));
+        Script.Require("svginject.js");
+    }
+}
+@if (Model.Terms.Count > 0)
+{
+    <img src="~/Themes/SPT.Zukunftsstadt/Content/Ortsteile.svg" class="svg-inject @classes" />
+}

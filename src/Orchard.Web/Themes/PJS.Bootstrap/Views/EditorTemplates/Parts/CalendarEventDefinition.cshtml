@@ -1,0 +1,76 @@
+﻿@model dsc.CalendarWidget.Models.CalendarEventDefinition
+
+@using dsc.CalendarWidget.Models;
+@using Orchard.Projections.Models;
+@using Orchard.ContentManagement;
+@using System.Globalization;
+
+@{
+    Script.Require("BootstrapDatetimepicker");
+}
+<fieldset>
+    @Html.LabelFor(m => m.TimeZone, T("Time Zone"))
+    <p>
+        @Html.DisplayFor(m => m.TimeZone)
+    </p>
+    <div class="row">
+        <div class='col-md-6'>
+            <div class="form-group">
+                @Html.LabelFor(m => m.StartDateTime, T("Start date and time"))
+                <div class='input-group date' id='@Html.IdFor(m => m.StartDateTime)_group'>
+                    @Html.TextBoxFor(m => m.StartDateTime, "{0:g}", new { @class = "form-control", autofocus = "autofocus" })
+                    <span class="input-group-addon">
+                        <span class="fa fa-calendar"></span>
+                    </span>
+                </div>
+                <span class="hint">@T("Enter the start date and time for the event")</span>
+            </div>
+        </div>
+        <div class='col-md-6'>
+            <div class="form-group">
+                @Html.LabelFor(m => m.EndDateTime, T("End date and time"))
+                <div class='input-group date' id='@Html.IdFor(m => m.EndDateTime)_group'>
+                    @Html.TextBoxFor(m => m.EndDateTime, "{0:g}", new { @class = "form-control" })
+                    <span class="input-group-addon">
+                        <span class="fa fa-calendar"></span>
+                    </span>
+                </div>
+                <span class="hint">@T("Enter the end date and time for the event")</span>
+            </div>
+        </div>
+    </div>
+    <span class="hint">@T("Click the calendar symbol to open the date time editor")</span>
+
+    <div class="checkbox">
+        <label>
+            @Html.EditorFor(m => m.IsAllDay @*, new { @class = "text large" }*@)
+            @T("All day")
+        </label>
+        <span class="hint">@T("Check if the event lasts all day")</span>
+    </div>
+
+    @Html.LabelFor(m => m.Url, T("Url"))
+    @Html.EditorFor(m => m.Url, new { @class = "text large" })
+    <span class="hint">@T("Enter the URL for the event | EDIT for item edit url | VIEW for item view url")</span>
+</fieldset>
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $(function () {
+            moment.locale('@CultureInfo.CurrentUICulture.Parent.IetfLanguageTag');
+            $('#@Html.IdFor(m => m.StartDateTime)_group').datetimepicker({
+                locale: '@CultureInfo.CurrentUICulture.Parent.IetfLanguageTag'
+                });
+            $('#@Html.IdFor(m => m.EndDateTime)_group').datetimepicker({
+                useCurrent: false, //Important! See issue #1075
+                locale: '@CultureInfo.CurrentUICulture.Parent.IetfLanguageTag'
+            });
+            $("#@Html.IdFor(m => m.StartDateTime)_group").on("dp.change", function (e) {
+                $('#@Html.IdFor(m => m.EndDateTime)_group').data("DateTimePicker").minDate(e.date);
+            });
+            $("#@Html.IdFor(m => m.EndDateTime)_group").on("dp.change", function (e) {
+                $('#@Html.IdFor(m => m.StartDateTime)_group').data("DateTimePicker").maxDate(e.date);
+            });
+        });
+    </script>
+}

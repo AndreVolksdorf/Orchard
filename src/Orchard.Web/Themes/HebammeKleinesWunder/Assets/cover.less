@@ -1,0 +1,84 @@
+﻿
+
+.cover {  
+  .jumbotron();
+
+  padding: 0;
+  background-color: transparent;
+  
+  @media screen and (min-width: @screen-sm-min) {
+    padding: 0;
+
+    .container &,
+    .container-fluid & {
+      padding-left:  0;
+      padding-right: 0;
+    }
+  }
+
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+
+  -webkit-align-items: center;
+  align-items: center;
+  
+  overflow:hidden;
+  position:relative;
+  min-height: 100%;
+
+  .navbar {
+    position:absolute;
+    top: 0;
+    width: 100%;
+    border: none;
+    background-color: transparent !important;
+
+    .navbar-nav li.active a {
+      background-color: transparent !important;
+    }
+
+    // Navbar toggle
+    //
+    // Custom button for toggling the `.navbar-collapse`, powered by the collapse
+    // JavaScript plugin.
+
+    .navbar-toggle {
+      border-color: transparent;
+      &:hover,
+      &:focus {
+        background-color: transparent;
+      }
+      .icon-bar {
+        background-color: @text-color;
+      }
+    }
+
+
+    &.navbar-inverse .navbar-toggle {
+      border-color: transparent;
+      &:hover,
+      &:focus {
+        background-color: transparent;
+      }
+      .icon-bar {
+        background-color: @text-inverse;
+      }
+    }
+  }
+
+  .cover-image {
+    z-index:-1;
+    position:absolute;
+    top:0;
+    width:100%;
+    height:100%;
+    background-size: cover;
+    background-position: center;
+    &.background-image-fixed, &.cover-image-fixed {
+      background-attachment: fixed;
+    }
+  }
+
+} 

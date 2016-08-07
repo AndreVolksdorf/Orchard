@@ -1,0 +1,60 @@
+﻿@using System.Globalization
+@using dsc.CalendarWidget.Models;
+@using Orchard.ContentManagement;
+
+@{
+    CalendarEventDefinition ev = Model.ContentPart;
+    var contentClass = "calendar-event";
+    if (ev.StartDateTime.Value.Year == DateTime.Now.Year)
+    {
+        contentClass += " current-year";
+    }
+    else
+    {
+        contentClass += " different-year";
+    }
+}
+
+<section class="@contentClass detail">
+    @if (Model.IsAllDay)
+    {
+        <time datetime="@ev.StartDateTime.Value.ToString("d", CultureInfo.InvariantCulture)">
+            <span class="day">@ev.StartDateTime.Value.Day</span>
+            <span class="month">@ev.StartDateTime.Value.ToString("MMM", CultureInfo.CurrentUICulture)</span>
+            <span class="year">@ev.StartDateTime.Value.Year.ToString()</span>
+        </time>
+        if (ev.StartDateTime.Value.Date != ev.EndDateTime.Value.Date)
+        {
+            <span>-</span>
+            <time datetime="@ev.EndDateTime.Value.ToString("d", CultureInfo.InvariantCulture)">
+                <span class="day">@ev.EndDateTime.Value.Day</span>
+                <span class="month">@ev.EndDateTime.Value.ToString("MMM", CultureInfo.CurrentUICulture)</span>
+                <span class="year">@ev.EndDateTime.Value.Year.ToString()</span>
+            </time>
+        }
+    }
+    else {
+        <time datetime="@ev.StartDateTime.Value.ToString("s", CultureInfo.InvariantCulture)Z">
+            <span class="day">@ev.StartDateTime.Value.Day</span>
+            <span class="month">@ev.StartDateTime.Value.ToString("MMM", CultureInfo.CurrentUICulture)</span>
+            <span class="year">@ev.StartDateTime.Value.Year.ToString()</span>
+            <span class="time">
+                @ev.StartDateTime.Value.ToString("t", CultureInfo.CurrentUICulture)
+                @if (ev.StartDateTime.Value.Date == ev.EndDateTime.Value.Date)
+                {
+                    <text>-</text> @ev.EndDateTime.Value.ToString("t", CultureInfo.CurrentUICulture)
+                }
+            </span>
+        </time>
+        if (ev.StartDateTime.Value.Date != ev.EndDateTime.Value.Date)
+        {
+            <span>-</span>
+            <time datetime="@ev.EndDateTime.Value.ToString(" s", CultureInfo.InvariantCulture)Z">
+                <span class="day">@ev.EndDateTime.Value.Day</span>
+                <span class="month">@ev.EndDateTime.Value.ToString("MMM", CultureInfo.CurrentUICulture)</span>
+                <span class="year">@ev.EndDateTime.Value.Year.ToString()</span>
+                <span class="time">@ev.EndDateTime.Value.ToString("t", CultureInfo.CurrentUICulture)</span>
+            </time>
+        }
+    }
+</section>

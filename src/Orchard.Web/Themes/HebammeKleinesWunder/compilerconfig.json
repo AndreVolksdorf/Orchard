@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "Styles/site-rtl.css",
+    "inputFile": "Styles/site-rtl.less"
+  },
+  {
+    "outputFile": "Styles/site.css",
+    "inputFile": "Styles/site.less"
+  }
+]

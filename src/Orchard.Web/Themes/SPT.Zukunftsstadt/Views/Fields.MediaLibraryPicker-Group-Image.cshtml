@@ -1,0 +1,20 @@
+﻿@using Orchard.ContentManagement
+@using Orchard.MediaLibrary.Fields
+@using Orchard.Utility.Extensions;
+@using Orchard.Mvc.Html;
+
+@{
+    var field = (MediaLibraryPickerField) Model.ContentField;
+    string displayName = field.DisplayName;
+    string name = field.Name;
+    var contents = field.MediaParts;
+}
+@if (field.MediaParts.Any())
+{
+    <div class="group-image">
+        <a href="@Url.ItemDisplayUrl((IContent)Model.ContentItem)">
+            <img title="@field.MediaParts.First().Title" src="@Display.MediaUrl(Profile: "GroupImage", Path: field.MediaParts.First().MediaUrl)" />
+        </a>
+
+    </div>
+}
