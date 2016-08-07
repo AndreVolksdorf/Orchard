@@ -3,7 +3,7 @@ AntiForgery: enabled
 Author: The Orchard Team
 Website: http://orchardproject.net
 Version: 1.0.0
-OrchardVersion: 1.0.0
+OrchardVersion: 1.9
 Description:  Adds a map image to content items, based on longitude and latitude.
 Features:
     SmartPage.Maps.GoogleMaps:

@@ -3,7 +3,7 @@ AntiForgery: enabled
 Author: André Volksdorf
 Website: http://www.smartpage.de
 Version: 1.0
-OrchardVersion: 1.0
+OrchardVersion: 1.9
 Description: Customizable voting module, so you can name the context of the collection (like, follow, contribute, support, ...)
 Dependencies: Contrib.Voting
 Features:    

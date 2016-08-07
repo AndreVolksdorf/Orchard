@@ -3,7 +3,7 @@ AntiForgery: enabled
 Author: SmartPage Webdesign
 Website: http://www.smartpage.de
 Version: 1.0
-OrchardVersion: 1.0
+OrchardVersion: 1.9
 Description: Enables functions to enter contact information for content items
 Features:
     SmartPage.Contact:
