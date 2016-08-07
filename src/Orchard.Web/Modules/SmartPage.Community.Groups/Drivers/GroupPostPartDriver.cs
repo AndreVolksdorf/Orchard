@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Web;
 using System.Web.Routing;
-using JetBrains.Annotations;
 using Orchard;
 using Orchard.ContentManagement;
 using Orchard.ContentManagement.Drivers;
@@ -14,7 +13,6 @@ using SmartPage.Community.Groups.ViewModels;
 
 namespace SmartPage.Community.Groups.Drivers
 {
-    [UsedImplicitly]
     public class GroupPostPartDriver : ContentPartDriver<GroupPostPart>
     {
         private readonly IWorkContextAccessor _workContextAccessor;

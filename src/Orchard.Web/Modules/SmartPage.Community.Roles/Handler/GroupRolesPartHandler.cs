@@ -1,11 +1,9 @@
 ﻿using System.Linq;
-using JetBrains.Annotations;
 using Orchard.Data;
 using Orchard.ContentManagement.Handlers;
 using SmartPage.Community.Roles.Models;
 
 namespace SmartPage.Community.Roles.Handlers {
-    [UsedImplicitly]
     public class GroupRolesPartHandler : ContentHandler {
         private readonly IRepository<GroupRolesPartRecord> _groupRolesRepository;
 

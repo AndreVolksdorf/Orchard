@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using JetBrains.Annotations;
 using Orchard.Caching;
 using Orchard.Data;
 using Orchard.Localization;
@@ -11,7 +10,6 @@ using SmartPage.Community.Roles.Models;
 using Orchard.Security.Permissions;
 
 namespace SmartPage.Community.Roles.Services {
-    [UsedImplicitly]
     public class RoleService : IRoleService {
         private const string SignalName = "SmartPage.Community.Roles.Services.RoleService";
 

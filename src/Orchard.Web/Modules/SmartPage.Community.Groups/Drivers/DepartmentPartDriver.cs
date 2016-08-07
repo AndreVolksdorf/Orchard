@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml;
-using JetBrains.Annotations;
 using Orchard;
 using Orchard.ContentManagement;
 using Orchard.ContentManagement.Drivers;
@@ -13,7 +12,6 @@ using SmartPage.Community.Groups.ViewModels;
 
 namespace SmartPage.Community.Groups.Drivers
 {
-    [UsedImplicitly]
     public class DepartmentPartDriver : ContentPartDriver<DepartmentPart>
     {
         private readonly IPostService _postService;

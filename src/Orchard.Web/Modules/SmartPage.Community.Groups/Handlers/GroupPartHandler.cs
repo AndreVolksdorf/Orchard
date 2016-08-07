@@ -1,5 +1,4 @@
 using System.Linq;
-using JetBrains.Annotations;
 using Orchard.Data;
 using Orchard.ContentManagement.Handlers;
 using System.Web.Routing;
@@ -10,7 +9,6 @@ using SmartPage.Community.Roles.Models;
 
 namespace SmartPage.Community.Groups.Handlers
 {
-    [UsedImplicitly]
     public class GroupPartHandler : ContentHandler
     {
         public GroupPartHandler(IRepository<GroupPartRecord> repository)

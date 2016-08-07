@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using JetBrains.Annotations;
 using Orchard;
 using Orchard.Caching;
 using Orchard.ContentManagement;
@@ -17,7 +16,6 @@ using SmartPage.Community.Roles.Drivers;
 
 namespace SmartPage.Community.Roles.Services
 {
-    [UsedImplicitly]
     public class GroupService : IGroupService
     {
         private const string SignalName = "SmartPage.Community.Groups.Services.GroupService";

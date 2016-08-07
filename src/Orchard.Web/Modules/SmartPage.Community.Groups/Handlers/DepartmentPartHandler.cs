@@ -1,6 +1,5 @@
 using System.Linq;
 using System.Web.Routing;
-using JetBrains.Annotations;
 using Orchard.ContentManagement;
 using Orchard.ContentManagement.Handlers;
 using Orchard.Core.Common.Models;
@@ -12,7 +11,6 @@ using SmartPage.Community.Groups.Services;
 
 namespace SmartPage.Community.Groups.Handlers
 {
-    [UsedImplicitly]
     public class DepartmentPartHandler : ContentHandler
     {
         private readonly IPostService _postService;

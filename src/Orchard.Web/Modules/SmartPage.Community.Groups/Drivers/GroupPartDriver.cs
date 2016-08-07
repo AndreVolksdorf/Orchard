@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using Orchard.ContentManagement;
 using Orchard.ContentManagement.Drivers;
 using Orchard.ContentManagement.Handlers;
@@ -10,7 +9,6 @@ using SmartPage.Community.Roles.Services;
 
 namespace SmartPage.Community.Groups.Drivers
 {
-    [UsedImplicitly]
     public class GroupPartDriver : ContentPartDriver<GroupPart>
     {
         private readonly IGroupService _groupRecordService;
