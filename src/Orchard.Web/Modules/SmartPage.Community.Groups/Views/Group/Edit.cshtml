@@ -1,0 +1,25 @@
+@using Orchard.Core.Title.Models
+@using SmartPage.Community.Groups.Models
+@{
+    Layout.Title = T("Edit group").ToString();
+}
+
+<h2>@Layout.Title</h2>
+
+<ol class="breadcrumb">
+    <li class="active">
+        <span>@T("Edit group")</span>
+    </li>
+    <li>
+        <span>@T("2. Create department")</span>
+    </li>
+    <li>
+        <span>@T("3. Create post")</span>
+    </li>
+</ol>
+@using (Html.BeginFormAntiForgeryPost())
+{
+    @Html.ValidationSummary()
+    // Model is a Shape, calling Display() so that it is rendered using the most specific template for its Shape type
+    @Display(Model)
+}

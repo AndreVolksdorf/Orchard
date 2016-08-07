@@ -1,0 +1,7 @@
+﻿@using Orchard.ContentManagement
+@using SmartPage.Community.Groups.Extensions
+@using SmartPage.Community.Groups.Models
+@{
+    var postPart = (GroupPostPart)Model.ContentPart;
+}
+<p>@T("A post from: ") <a href="@Url.GroupView(postPart.DepartmentPart.GroupPart)">@postPart.DepartmentPart.GroupName</a> / <a href="@Url.DepartmentView(postPart.DepartmentPart)">@postPart.DepartmentPart.Title</a></p>

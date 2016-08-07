@@ -1,0 +1,40 @@
+﻿@using SmartPage.Community.Groups
+@model SmartPage.Community.Groups.Models.DepartmentPart
+@{
+    Script.Require("jQuery");
+}
+<fieldset>
+    @Html.LabelFor(m => m.Description, T("Description"))
+    @Html.TextAreaFor(m => m.Description, 5, 60, null)
+    <h6 class="pull-right" id="@Html.IdFor(m => m.Description)_count"></h6>
+    <span class="hint">@T("Please enter a short description of the department. 256 chars max")</span>
+</fieldset>
+@if (AuthorizedFor(Permissions.StickyDepartment))
+{
+    <fieldset>
+        <span class="checkbox-and-label">
+            <input type="checkbox" value="true" class="check-box" id="@Html.FieldIdFor(m => m.IsSticky)" name="@Html.FieldNameFor(m => m.IsSticky)" @(Model.IsSticky ? "checked=\"checked\"" : "") />
+            <input name="@Html.FieldNameFor(m => m.IsSticky)" type="hidden" value="false">
+            <label class="forcheckbox" for="@Html.FieldIdFor(m => m.IsSticky)">@T("Is Sticky")</label>
+        </span>
+        <span class="hint">@T("Departments that are important but rarely receive posts are stickyed. A sticky department will always appear in front of normal departments.")</span>
+    </fieldset>
+}
+
+@using (Script.Foot())
+{
+    <script>
+        var @Html.IdFor(m => m.Description)_max = 256;
+        var @Html.IdFor(m => m.Description)_length = $('#@Html.IdFor(m => m.Description)').val().length;
+        var @Html.IdFor(m => m.Description)_remaining = @Html.IdFor(m => m.Description)_max - @Html.IdFor(m => m.Description)_length;
+
+        $('#@Html.IdFor(m => m.Description)_count').html(@Html.IdFor(m => m.Description)_remaining + '@T(" remaining")');
+
+        $('#@Html.IdFor(m => m.Description)').keyup(function () {
+            var @Html.IdFor(m => m.Description)_length = $('#@Html.IdFor(m => m.Description)').val().length;
+            var @Html.IdFor(m => m.Description)_remaining = @Html.IdFor(m => m.Description)_max - @Html.IdFor(m => m.Description)_length;
+
+            $('#@Html.IdFor(m => m.Description)_count').html(@Html.IdFor(m => m.Description)_remaining + '@T(" remaining")');
+        });
+    </script>
+}

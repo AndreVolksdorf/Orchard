@@ -1,0 +1,16 @@
+﻿@using SmartPage.Community.Groups.Extensions
+@using SmartPage.Community.Groups.Models
+@{
+    var groupPart = (GroupPart)Model.ContentPart;
+}
+@if (AuthorizedFor(Permissions.EditGroupContent, groupPart))
+{
+    <div class="item-properties actions">
+        <p>
+            <a href="@Url.DepartmentCreate(groupPart)" class="create">@T("Create Department")</a>
+            @if (AuthorizedFor(Permissions.ManageGroups, groupPart)) {
+                <a href="@Url.GroupEdit(groupPart)" class="edit">@T("Edit group")</a>
+            }
+        </p>
+    </div>
+}

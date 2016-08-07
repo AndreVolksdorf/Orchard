@@ -1,0 +1,7 @@
+﻿@if (HasText(Model.Description))
+{
+    var body = new HtmlString(Model.Description.ToString().Replace(Environment.NewLine, "</p>" + Environment.NewLine + "<p>"));
+    <div class="content-description group-description">
+        <p>@body</p>
+    </div>
+}

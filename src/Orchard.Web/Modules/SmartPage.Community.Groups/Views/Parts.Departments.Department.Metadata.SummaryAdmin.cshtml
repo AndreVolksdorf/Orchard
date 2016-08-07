@@ -1,0 +1,12 @@
+﻿@using SmartPage.Community.Groups.Models
+@{
+    DepartmentPart departmentPart = Model.ContentPart;
+}
+<ul class="contentItemStatus">
+    @if(departmentPart.IsSticky) {
+        <li><img class="icon" src="@Href("~/Modules/NGM.Group/Content/Admin/images/sticky.gif")" alt="@T("Sticky Department")" title="@T("The department is a Sticky Department")" /> </li> <li>@T("Sticky")&nbsp;&#124;&nbsp;</li>
+    }
+    @if (departmentPart.IsClosed) {
+        <li><img class="icon" src="@Href("~/Modules/NGM.Group/Content/Admin/images/notapproved.gif")" alt="@T("Closed Department")" title="@T("The department is closed")" /> </li> <li>@T("Closed")&nbsp;&#124;&nbsp;</li>
+    }
+</ul>

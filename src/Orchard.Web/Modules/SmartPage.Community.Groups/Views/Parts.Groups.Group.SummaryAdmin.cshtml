@@ -1,0 +1,10 @@
+﻿@using Orchard.ContentManagement;
+@using Orchard.Utility.Extensions;
+@using SmartPage.Community.Groups.Extensions
+@using SmartPage.Community.Groups.Models
+@{
+    ContentItem contentItem = Model.ContentItem;
+    GroupPart group = (GroupPart)contentItem.Get(typeof(GroupPart));
+}
+<a href="@Url.GroupForAdmin(group)" title="@T("List Departments")">@T("List Departments")</a>@T(" | ")
+<a href="@Url.DepartmentCreate(group)" title="@T("New Department")">@T("New Department")</a>@T(" | ")

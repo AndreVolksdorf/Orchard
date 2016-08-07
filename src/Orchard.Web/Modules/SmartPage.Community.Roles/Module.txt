@@ -1,0 +1,18 @@
+﻿Name: SmartPage.Community.Roles
+AntiForgery: enabled
+Author: The Orchard Team
+Website: http://orchardproject.net
+Version: 1.0
+OrchardVersion: 1.9
+Description: Description for the module
+Features:
+    SmartPage.Community.Roles:
+		Name: Community Roles
+		Description: Standard user roles.
+		Category: Community
+		Dependencies: Orchard.Users,Orchard.Roles
+	SmartPage.Community.Workflows:
+		Name: Community Roles Workflows Activities
+        Description: Provides a role based activities.
+		Category: Community
+		Dependencies: Orchard.Workflows

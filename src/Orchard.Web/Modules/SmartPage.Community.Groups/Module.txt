@@ -1,0 +1,13 @@
+﻿Name: SmartPage.Community.Groups
+AntiForgery: enabled
+Author: SmartPage Webdesign
+Website: http://www.smartpage.de
+Version: 1.0
+OrchardVersion: 1.9
+Description: Enables a three level content structure. Groups > Departments > Posts
+Features:
+    SmartPage.Community.Groups:
+		Name: Community Groups
+        Description: Enable Content type for SmartPage.Community.Groups.
+		Category: Community
+		Dependencies:  SmartPage.Community.Roles, Orchard.Autoroute

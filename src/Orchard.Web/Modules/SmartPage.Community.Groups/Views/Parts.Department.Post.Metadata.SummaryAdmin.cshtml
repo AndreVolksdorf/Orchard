@@ -1,0 +1,12 @@
+﻿@using SmartPage.Community.Groups.Models
+@{
+    GroupPostPart contentPart = Model.ContentPart;
+}
+<ul>
+    @if (contentPart.IsParentDepartment()) {
+        <li>@T("Parent post")@T(" | ")</li>
+    }
+    else {
+        <li>@T("In reply to {0}", contentPart.RepliedOn)@T(" | ")</li>
+    }
+</ul>

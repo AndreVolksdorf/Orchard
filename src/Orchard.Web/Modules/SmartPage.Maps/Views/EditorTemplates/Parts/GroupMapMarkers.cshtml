@@ -1,0 +1,12 @@
+﻿@model SmartPage.Maps.Models.GroupMapMarkersPart
+
+<fieldset>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Height)
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(model => model.Height)
+        @Html.ValidationMessageFor(model => model.Height)
+    </div>
+
+</fieldset>

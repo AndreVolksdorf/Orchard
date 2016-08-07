@@ -1,0 +1,17 @@
+﻿@model SmartPage.Community.Groups.Settings.GroupPartSettings
+<fieldset>
+    <div>
+        @Html.EditorFor(m => m.DefaultDepartmentedPosts)
+        <label class="forcheckbox" for="@Html.FieldIdFor( m => m.DefaultDepartmentedPosts)">@T("Use departmented posts by default")</label>
+    </div>
+    <div>
+        @Html.LabelFor(m => m.PostType)
+        @Html.EditorFor(m => m.PostType)
+        <span class="hint">@T("The Content Type to use when creating posts. This type must have GroupPostPart attached.")</span>
+    </div>
+    <div>
+        @Html.LabelFor(m => m.DepartmentType)
+        @Html.EditorFor(m => m.DepartmentType)
+        <span class="hint">@T("The Content Type to use when creating departments. This type must have DepartmentPart attached.")</span>
+    </div>
+</fieldset>

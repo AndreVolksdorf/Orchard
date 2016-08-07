@@ -1,0 +1,18 @@
+@using SmartPage.Community.Groups.Extensions
+@model SmartPage.Community.Groups.ViewModels.DepartmentMoveAdminViewModel
+
+@{ Layout.Title = T("Move Department").ToString(); }
+
+@using (Html.BeginFormAntiForgeryPost(Url.Action("Move", "DepartmentAdmin", new { area = Constants.LocalArea, departmentId = Model.DepartmentId, returnUrl = Request.QueryString["ReturnUrl"] }))) {
+<fieldset>
+  <legend>@T("Details")</legend>
+    <div>
+        @Html.LabelFor(m => m.GroupId, T("Destination"))
+        @Html.DropDownListFor(m => m.GroupId, new SelectList(Model.AvailableGroups, "Id", "Title"))
+        <span class="hint">@T("This is the group that the department will be moved to.")</span>
+    </div>
+
+</fieldset>
+  
+  <button type="submit">@T("Update")</button>
+}

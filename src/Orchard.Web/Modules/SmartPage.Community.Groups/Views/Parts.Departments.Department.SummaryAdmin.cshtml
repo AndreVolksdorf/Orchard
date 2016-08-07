@@ -1,0 +1,17 @@
+﻿@using Orchard.ContentManagement;
+@using Orchard.Utility.Extensions;
+@using SmartPage.Community.Groups.Extensions
+@using SmartPage.Community.Groups.Models
+@{
+    ContentItem contentItem = Model.ContentItem;
+    DepartmentPart department = (DepartmentPart)contentItem.Get(typeof(DepartmentPart));
+}
+<a href="@Url.DepartmentForAdmin(department)" title="@T("List Posts")">@T("List Posts")</a>@T(" | ")
+<a href="@Url.DepartmentMoveForAdmin(department)" title="@T("Move")">@T("Move")</a>@T(" | ")
+
+@if (department.IsClosed) {
+    <a href="@Url.DepartmentOpenForAdmin(department)" title="@T("Reopen")">@T("Reopen")</a>@T(" | ")
+}
+else {
+    <a href="@Url.DepartmentCloseForAdmin(department)" title="@T("Close")">@T("Close")</a>@T(" | ")
+}

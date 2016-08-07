@@ -1,0 +1,21 @@
+﻿@model SmartPage.Community.Groups.ViewModels.RecentDepartmentsViewModel
+
+@using Orchard.ContentManagement.MetaData.Models
+@using SmartPage.Community.Groups.Models
+
+<fieldset>
+    <div>
+        @Html.LabelFor(m => m.DepartmentName, T("For Group"))
+        <select id="@Html.FieldIdFor(m => m.DepartmentName)" name="@Html.FieldNameFor(m => m.DepartmentName)">
+		@foreach(ContentTypeDefinition blog in Model.Departments) {
+            @Html.SelectOption(Model.DepartmentName, blog.Name, blog.DisplayName)
+		}
+		</select>
+        <span class="hint">@T("Select which blog you want to display the recent posts for")</span>
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Count, T("Count"))
+        @Html.TextBoxFor(m => m.Count, new { @class = "text small"})
+        <span class="hint">@T("Number of posts to display. Zero for all.")</span>
+    </div>
+</fieldset>

@@ -1,0 +1,11 @@
+﻿@using SmartPage.Community.Groups
+@using SmartPage.Community.Groups.Extensions
+@using SmartPage.Community.Groups.Models
+@{
+    Style.Require("GroupsAdmin");
+}
+@if (AuthorizedFor(Permissions.ManageGroups)) {
+<div class="item-properties actions">
+    <p><a href="@Url.GroupEdit((GroupPart)Model.ContentPart)" class="edit">@T("Group Properties")</a></p>
+</div>
+}

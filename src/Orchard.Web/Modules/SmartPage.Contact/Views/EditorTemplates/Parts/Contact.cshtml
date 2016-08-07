@@ -1,0 +1,22 @@
+﻿@using System.Web.Mvc.Html
+@model SmartPage.Contact.Models.ContactPart
+
+<fieldset>
+    <legend>@T("Contact details")</legend>
+    <p>
+        @Html.Hint(T("What kind of contact information do you want to publish?"))
+    </p>
+
+    @Html.LabelFor(model => model.Phone, @T("Phone"))
+    @Html.TextBoxFor(model => model.Phone)
+    @Html.ValidationMessageFor(model => model.Phone)
+
+    @Html.LabelFor(model => model.Website, @T("Website"))
+    @Html.TextBoxFor(model => model.Website)
+    @Html.ValidationMessageFor(model => model.Website)
+
+    @Html.LabelFor(model => model.Email, @T("Email"))
+    @Html.TextBoxFor(model => model.Email)
+    @Html.ValidationMessageFor(model => model.Email)
+
+</fieldset>

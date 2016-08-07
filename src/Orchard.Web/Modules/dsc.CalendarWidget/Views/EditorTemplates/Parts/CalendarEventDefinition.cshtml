@@ -1,0 +1,95 @@
+﻿@model CalendarEventDefinition
+
+@using dsc.CalendarWidget.Models;
+@using Orchard.Projections.Models;
+@using Orchard.ContentManagement;
+@using System.Web.WebPages;
+
+@{
+    Style.Require("jQueryCalendars_Picker");
+    Style.Require("jQueryUI_Calendars_Picker");
+    Style.Require("jQueryTimeEntry");
+    Style.Require("jQueryDateTimeEditor");
+
+    Script.Require("jQueryCalendars_All").AtFoot();
+    Script.Require("jQueryCalendars_Picker_Ext").AtFoot();
+    Script.Require("jQueryTimeEntry").AtFoot();
+    Script.Require("jQueryDateTimeEditor").AtFoot();
+}
+
+<fieldset>
+    @Html.LabelFor(m => m.TimeZone, T("Time Zone"))
+    @Html.DisplayFor(m => m.TimeZone)
+</fieldset>
+
+<fieldset>
+    @Html.LabelFor(m => m.StartDate, T("Start date and time"))
+    <label class="forpicker" for="@Html.FieldIdFor(m=>m.StartDate)">@T("Date")</label>
+    <span class="startDate">@Html.EditorFor(m => m.StartDate, new { @autofocus = "autofocus" })</span>
+
+    <label class="forpicker" for="@Html.FieldIdFor(m=>m.StartTime)">@T("Time")</label>
+    <span class="startTime" style="@(Model.IsAllDay ? "display:none;" : "")">@Html.EditorFor(m => m.StartTime)</span>
+    <span class="hint">@T("Enter the start date and time for the event")</span>
+</fieldset>
+
+<fieldset>
+    @Html.LabelFor(m => m.EndDate, T("End date and time"))
+    <label class="forpicker" for="@Html.FieldIdFor(m=>m.EndDate)">@T("Date")</label>
+    <span class="endDate">@Html.EditorFor(m => m.EndDate)</span>
+
+    <label class="forpicker" for="@Html.FieldIdFor(m=>m.EndTime)">@T("Time")</label>
+    <span class="endTime" style="@(Model.IsAllDay ? "display:none;" : "")">@Html.EditorFor(m => m.EndTime)</span>
+    <span class="hint">@T("Enter the end date and time for the event")</span>
+</fieldset>
+
+<fieldset>
+    @Html.LabelFor(m => m.IsAllDay, T("All day"))
+    @Html.CheckBoxFor(m => m.IsAllDay)
+    <span class="hint">@T("Check if the event lasts all day")</span>
+</fieldset>
+
+<fieldset>
+    @Html.LabelFor(m => m.Url, T("Url"))
+    @Html.TextBoxFor(m => m.Url, new { @class = "text large" })
+    <span class="hint">@T("Enter the URL for the event | EDIT for item edit url | VIEW for item view url")</span>
+</fieldset>
+
+@using (Script.Foot())
+{
+
+    @* Generate the localization scripts. *@
+    { @Display.CalendarsPickerLocalization() }
+    { @Display.TimeEntryLocalization() }
+
+<script type="text/javascript">
+    //<![CDATA[
+    $(function () {
+
+            $("#@Html.FieldIdFor(m => Model.StartDate)").calendarsPicker({
+                showAnim: "",
+                renderer: $.extend({}, $.calendars.picker.themeRollerRenderer, {
+                    picker: "<div {popup:start} id='ui-datepicker-div'{popup:end} class='ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all{inline:start} ui-datepicker-inline{inline:end}'><div class='ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all'>{link:prev}{link:today}{link:next}</div>{months}{popup:start}{popup:end}<div class='ui-helper-clearfix'></div></div>",
+                    month: "<div class='ui-datepicker-group'><div class='ui-datepicker-month ui-helper-clearfix'>{monthHeader:MM yyyy}</div><table class='ui-datepicker-calendar'><thead>{weekHeader}</thead><tbody>{weeks}</tbody></table></div>"
+                })
+            });
+
+            $("#@Html.FieldIdFor(m => Model.StartTime)").timeEntry();
+
+            $("#@Html.FieldIdFor(m => Model.EndDate)").calendarsPicker({
+                showAnim: "",
+                renderer: $.extend({}, $.calendars.picker.themeRollerRenderer, {
+                    picker: "<div {popup:start} id='ui-datepicker-div'{popup:end} class='ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all{inline:start} ui-datepicker-inline{inline:end}'><div class='ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all'>{link:prev}{link:today}{link:next}</div>{months}{popup:start}{popup:end}<div class='ui-helper-clearfix'></div></div>",
+                    month: "<div class='ui-datepicker-group'><div class='ui-datepicker-month ui-helper-clearfix'>{monthHeader:MM yyyy}</div><table class='ui-datepicker-calendar'><thead>{weekHeader}</thead><tbody>{weeks}</tbody></table></div>"
+                })
+            });
+
+            $("#@Html.FieldIdFor(m => Model.EndTime)").timeEntry();
+
+        $("#@Html.FieldIdFor(m=>m.IsAllDay)").on("change", function () {
+            $(".startTime").toggle(!this.checked);
+            $(".endTime").toggle(!this.checked);
+        });
+    });
+    //]]>
+</script>
+}

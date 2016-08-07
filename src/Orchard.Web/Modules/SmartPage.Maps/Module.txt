@@ -1,0 +1,20 @@
+﻿Name: GoogleMaps
+AntiForgery: enabled
+Author: The Orchard Team
+Website: http://orchardproject.net
+Version: 1.0.0
+OrchardVersion: 1.9
+Description:  Adds a map image to content items, based on longitude and latitude.
+Features:
+    SmartPage.Maps.GoogleMaps:
+        Description: Adds a map image to content items, based on longitude and latitude.
+		Dependencies: Orchard.Widgets, Orchard.Alias, Orchard.jQuery
+        Category: Geolocation		
+    SmartPage.Maps.MapMarkers:
+        Description: Description for feature Orchard.LearnOrchard.FeaturedProduct.
+		Dependencies: Orchard.Widgets, Orchard.Alias, Orchard.jQuery
+        Category: Geolocation		
+    SmartPage.Maps.GroupMapMarkers:
+        Description: Description for feature Orchard.LearnOrchard.FeaturedProduct.
+		Dependencies: Orchard.Widgets, Orchard.Alias, Orchard.jQuery, SmartPage.Community.Groups
+        Category: Geolocation		

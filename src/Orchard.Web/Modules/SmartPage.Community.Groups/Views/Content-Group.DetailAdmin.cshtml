@@ -1,0 +1,8 @@
+﻿@using SmartPage.Community.Groups.Extensions
+@using SmartPage.Community.Groups.Models
+@{ Layout.Title = Model.Title; }
+
+@Display(Model.Header)
+@Display(Model.Actions)
+<div class="manage"><a href="@Url.DepartmentCreate((GroupPart)Model.ContentItem.Get(typeof(GroupPart)))" class="add button primaryAction">@T("New Department")</a></div>
+@Display(Model.Content)

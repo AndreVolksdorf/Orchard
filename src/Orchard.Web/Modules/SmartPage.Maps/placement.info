@@ -1,0 +1,8 @@
+﻿<Placement>
+  <Place Parts_Map="Map:10"/>
+  <Place Parts_Map_Edit="Content:7.5"/>
+  <Place Parts_MapMarkers="Content:1"/>
+  <Place Parts_MapMarkers_Edit="Content:7.5"/>
+  <Place Parts_GroupMapMarkers="Content:1"/>
+  <Place Parts_GroupMapMarkers_Edit="Content:7.5"/>
+</Placement>

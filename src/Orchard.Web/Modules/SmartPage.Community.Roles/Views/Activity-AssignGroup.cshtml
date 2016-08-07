@@ -1,0 +1,8 @@
+﻿@{
+    var groupsData = (string)Model.State.Groups;
+    var groups = !string.IsNullOrWhiteSpace(groupsData) ? groupsData.Split(',').ToArray() : Enumerable.Empty<string>().ToArray();
+    var description = groups.Any() ? T("Assign groups: {0}", string.Join(", ", groups)) : T("No groups specified");
+}
+
+<div class="activity-assign-group" title="@description">
+</div>

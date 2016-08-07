@@ -1,0 +1,7 @@
+﻿@using SmartPage.Community.Groups.Extensions
+@using SmartPage.Community.Groups.Models
+@{
+    var departmentPart = (DepartmentPart)Model.DepartmentPart;
+    var newGroupPostPart = (GroupPostPart)Model.NewPost;
+}
+<p>@T("A Department of: ") <a href="@Url.GroupView(departmentPart.GroupPart)">@departmentPart.GroupName</a></p>

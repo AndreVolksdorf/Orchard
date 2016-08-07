@@ -1,0 +1,14 @@
+﻿<Placement>
+	<Place Parts_CalendarWidget="Content:1"/>
+	<Place Parts_CalendarWidget_Edit="Content:8"/>
+	<Place Parts_CalendarEventDefinition_Edit="Content:9"/>
+  <Match DisplayType="Detail">
+    <Place Parts_CalendarEventDefinition="Content:5"/>
+  </Match>
+  <Match DisplayType="Summary">
+    <Place Parts_CalendarEventDefinition_Summary="Content:5"/>
+  </Match>
+  <Match DisplayType="SummaryAdmin">
+    <Place Parts_CalendarEventDefinition_SummaryAdmin="Content:5"/>
+  </Match>
+</Placement>

@@ -1,0 +1,9 @@
+﻿@using SmartPage.Community.Groups.Models
+@{
+    DepartmentPart contentPart = Model.ContentPart;
+}
+
+<fieldset class="department-closed">
+    <h2>@T("Closed on {0} by {1}", contentPart.ClosedOnUtc, contentPart.ClosedBy.UserName)</h2>
+    <p>@contentPart.ClosedDescription</p>
+</fieldset>

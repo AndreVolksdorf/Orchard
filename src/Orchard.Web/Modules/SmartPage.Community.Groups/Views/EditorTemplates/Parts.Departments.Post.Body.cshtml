@@ -1,0 +1,6 @@
+﻿@model SmartPage.Community.Groups.ViewModels.PostBodyEditorViewModel
+<fieldset>
+    <label>@T("Body")</label>
+    @Display.Post_Body_Editor(Model)
+    @Html.ValidationMessageFor(m => m.Text)
+</fieldset>

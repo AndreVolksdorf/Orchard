@@ -1,0 +1,117 @@
+﻿@using System.Globalization
+@model SmartPage.Maps.Settings.MapPartSettings
+
+@{
+    var culture = CultureInfo.CreateSpecificCulture("en-US");
+}
+<fieldset>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.ApiKey, T("Google Maps JavaScript API"))
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(model => model.ApiKey)
+        @Html.Hint(T("Enter your google maps api key. <a href=\"{0}\" target=\"_blank\">Get your key</a>"))
+        @Html.ValidationMessageFor(model => model.ApiKey)
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Height, T("Height"))
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(model => model.Height)
+        @Html.Hint(T("The height of the map"))
+        @Html.ValidationMessageFor(model => model.Height)
+    </div>
+
+    <div id="locationField" style="position: absolute; z-index: 1; width: 100%; margin: 10px 0; padding: 0 40px 0 10px;">
+        <input id="autocomplete" placeholder="@T("Enter your address")"
+               onFocus="geolocate()" type="text" />
+    </div>
+    <div id="map" style="height: 252px"></div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.DefaultLatitude, T("Default latitude"))
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(model => model.DefaultLatitude)
+        @Html.Hint(T("The default DefaultLatitude of the map"))
+        @Html.ValidationMessageFor(model => model.DefaultLatitude)
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.DefaultLongitude, T("Default longitude"))
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(model => model.DefaultLongitude)
+        @Html.Hint(T("The default longitude of the map"))
+        @Html.ValidationMessageFor(model => model.DefaultLongitude)
+    </div>
+</fieldset>
+
+<script>
+    // This example displays an address form, using the autocomplete feature
+    // of the Google Places API to help users fill in the information.
+
+    var placeSearch, autocomplete, map;
+
+    function initAutocomplete(){
+        // Create the autocomplete object, restricting the search to geographical
+        // location types.
+        autocomplete = new google.maps.places.Autocomplete(
+            /** type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+            { types: ['geocode'] });
+
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 8,
+            disableDefaultUI: true,
+            center: { lat: @Model.DefaultLatitude.ToString("R", culture), lng: @Model.DefaultLongitude.ToString("R", culture) }
+        });
+        var geocoder = new google.maps.Geocoder();
+
+        // When the user selects an address from the dropdown, populate the address
+        // fields in the form.
+        autocomplete.addListener('place_changed', fillInAddress);
+
+    }
+
+    // [START region_fillform]
+    function fillInAddress() {
+        // Get the place details from the autocomplete object.
+        var place = autocomplete.getPlace();
+        console.log(place);
+        map.setCenter(place.geometry.location);
+
+        var marker = new google.maps.Marker({
+            map: map,
+            position: place.geometry.location
+        });
+
+        var lon = document.getElementById('@Html.IdFor(model => model.DefaultLongitude)');
+        lon.value = place.geometry.location.lng();
+        lon.value = lon.value.replace('.', ',').replace(' ', '');
+        var lat = document.getElementById('@Html.IdFor(model => model.DefaultLatitude)');
+        lat.value = place.geometry.location.lat();
+        lat.value = lat.value.replace('.', ',').replace(' ', '');
+
+    }
+    // [END region_fillform]
+
+    // [START region_geolocation]
+    // Bias the autocomplete object to the user's geographical location,
+    // as supplied by the browser's 'navigator.geolocation' object.
+    function geolocate() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var geolocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                var circle = new google.maps.Circle({
+                    center: geolocation,
+                    radius: position.coords.accuracy
+                });
+                autocomplete.setBounds(circle.getBounds());
+            });
+        }
+    }
+    // [END region_geolocation]
+
+</script>
+<script src="@string.Format("https://maps.googleapis.com/maps/api/js?key={0}&libraries=places&callback=initAutocomplete",Model.ApiKey)" async defer></script>

@@ -1,0 +1,18 @@
+@using SmartPage.Community.Groups.Extensions
+@model SmartPage.Community.Groups.ViewModels.DepartmentCloseAdminViewModel
+
+@{ Layout.Title = T("Close Department").ToString(); }
+
+@using (Html.BeginFormAntiForgeryPost(Url.Action("Close", "DepartmentAdmin", new {area = Constants.LocalArea, departmentId = Model.DepartmentId, returnUrl = Request.QueryString["ReturnUrl"]}))) {
+    <fieldset>
+        <legend>Details</legend>
+        <div>
+            @Html.LabelFor(m => m.Description, T("Description"))
+            @Html.TextArea("Description", (string) Model.Description, 25, 80, null)
+            <span class="hint">@T("This is why you are closing the department.")</span>
+        </div>
+
+    </fieldset>
+
+    <button type="submit">@T("Close")</button>
+}

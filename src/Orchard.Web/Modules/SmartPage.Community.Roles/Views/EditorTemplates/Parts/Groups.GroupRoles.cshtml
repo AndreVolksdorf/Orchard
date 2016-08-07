@@ -1,0 +1,30 @@
+@model GroupRolesViewModel
+@using SmartPage.Community.Roles.ViewModels;
+
+<fieldset>
+    <legend>@T("Roles")</legend>
+    @if (Model.GroupRoles.Count > 0)
+    {
+        var index = 0;
+        foreach (var entry in Model.GroupRoles)
+        {
+            if (string.Equals(entry.Name, "Authenticated", StringComparison.OrdinalIgnoreCase) || string.Equals(entry.Name, "Anonymous", StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            @Html.Hidden("Roles[" + index + "].RoleId", entry.RoleId)
+            @Html.Hidden("Roles[" + index + "].Name", entry.Name)
+
+            <div>
+                @Html.CheckBox("Roles[" + index + "].Deleted", entry.Deleted)
+                <label class="forcheckbox" for="@Html.FieldIdFor(m => m.GroupRoles[index].Deleted)">@entry.Name</label>
+            </div>
+            index++;
+        }
+    }
+    else
+    {
+        <p>@T("There are no roles.")</p>
+    }
+</fieldset>

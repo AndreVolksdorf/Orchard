@@ -1,0 +1,84 @@
+﻿<Placement>
+  <!-- edit "shapes" -->
+  <Place Parts_Groups_Group_Fields="Content:2"/>
+  <Place Parts_Departments_Department_Fields="Content:2"/>
+
+  <Place Group_DeleteButton="Sidebar:25" />
+
+  <Place Parts_Departments_Post_Body_Edit="Content:2"/>
+
+  <Match DisplayType="Detail">
+    <Place Parts_Departments_Post_Body_Summary="-"
+           Parts_Departments_Post_Body="Content:5"/>
+  </Match>
+
+  <Match DisplayType="Summary">
+    <Place Parts_Departments_Post_Body_Summary="Content:5"/>
+  </Match>
+
+  <Match DisplayType="SummaryAdmin">
+    <Place Parts_Groups_Group_SummaryAdmin="Actions:10"
+           Parts_Groups_Group_Description="Content:before"
+           Parts_Departments_Post_Body_Summary="Content:before.1"/>
+  </Match>
+  <Match DisplayType="DetailAdmin">
+    <Place Parts_Groups_Department_List_Admin="Content:5"
+           Parts_Groups_Group_Manage="Actions"
+           Parts_Groups_Group_Description="Actions:after"/>
+  </Match>
+
+  <Match ContentType="Group">
+    <Match DisplayType="Detail">
+      <Place Parts_Common_Metadata="-"
+             Parts_Groups_Department_List="Content"
+             Parts_Groups_Group_Description="Meta:1"
+             Parts_Group_Manage="Actions:1"/>
+    </Match>
+    <Match DisplayType="DetailAdmin">
+      <Place Parts_Groups_Department_List_Admin="Content:5"
+             Parts_Groups_Group_Manage="Actions"
+             Parts_Groups_Group_Description="Actions:after"/>
+    </Match>
+    <Match DisplayType="Summary">
+      <Place Parts_Groups_Group_Description="Content:before"
+             Parts_Groups_Group_GroupReplyCount="Meta:3"
+             Parts_Groups_Group_GroupDepartmentCount="Meta:4"/>
+    </Match>
+    <Match DisplayType="SummaryAdmin">
+      <Place Parts_Groups_Group_SummaryAdmin="Actions:10"
+             Parts_Groups_Group_Description="Content:before"/>
+    </Match>
+  </Match>
+
+  <Match ContentType="Department">
+    <Match DisplayType="Detail">
+      <Place Parts_Common_Metadata="-"
+             Parts_Department_Group="Meta:1"
+             Parts_Department_Manage="Actions:1"
+             Parts_Department_Description="Meta:3"
+             Parts_Departments_Department_Closed="Meta:2"/>
+    </Match>
+    <Match DisplayType="Summary">
+      <Place Parts_Departments_Department_DepartmentReplyCount="Meta:3"
+             Group_Metadata_First="Content:after"
+             Parts_Department_Description="Content:before"
+             Group_Metadata_Latest="Content:after"/>
+    </Match>
+    <Match DisplayType="SummaryAdmin">
+      <Place Parts_Departments_Department_SummaryAdmin="Actions:10"
+             Parts_Departments_Department_Metadata_SummaryAdmin="Meta:1.3"/>
+    </Match>
+  </Match>
+
+  <Match ContentType="GroupPost">
+    <Match DisplayType="Detail">
+      <Place Parts_Department_Post_Meta="Header:1"/>
+      <Place Parts_Department_Post_Manage="Actions:1"/>
+    </Match>
+
+    <Match DisplayType="SummaryAdmin">
+      <Place Parts_Department_Post_Metadata_SummaryAdmin="Meta:1.2"/>
+    </Match>
+  </Match>
+
+</Placement>

@@ -1,0 +1,29 @@
+@using SmartPage.Community.Groups.Extensions
+@using SmartPage.Community.Groups.Helpers
+@using SmartPage.Community.Groups.Models
+@{ Layout.Title = T("Select post type").ToString();
+    GroupPart groupPart = HierarchyHelpers.GetGroup(Model.ContentItem);
+    DepartmentPart departmentPart = HierarchyHelpers.GetDepartmentPart(Model.ContentItem);
+}
+<h2>@Layout.Title</h2>
+
+<ol class="breadcrumb">
+    <li>
+        <a href="@Url.GroupEdit(groupPart)" class="edit">1. @groupPart.Title <i class="fa fa-check"> </i></a>
+    </li>
+    <li>
+        <a href="@Url.DepartmentForEditor(departmentPart)" class="edit">2. @departmentPart.Title <i class="fa fa-check"> </i></a>
+    </li>
+    <li class="active">
+        <span>@T("3. Select post type")</span>
+    </li>
+</ol>
+
+@foreach (var type in Model.PostTypes)
+{
+    <p>
+        @Html.ActionLink((string)type.DisplayName, "Create",
+            new { Area = Constants.LocalArea, Type = (string)type.Name, contentId = Model.ContentId },
+            new { @class = "create" })
+    </p>
+}
