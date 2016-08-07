@@ -1,0 +1,33 @@
+﻿@using dsc.CalendarWidget.Models;
+@using Orchard.ContentManagement;
+
+@{
+    CalendarEventDefinition ev = Model.ContentPart;
+}
+    
+<section>
+    @{
+        if (Model.IsAllDay)
+        {
+            @T("This event occurs all day at <i>{0}</i>", ev.StartDateTime.Value.ToString("d"))
+            if (ev.StartDateTime.Value.Date != ev.EndDateTime.Value.Date)
+            {
+                @T(" and lasts until <i>{0}</i>", ev.EndDateTime.Value.ToString("d"))
+            }
+        }
+        else
+        {
+            @T("This event occurs at <i>{0}</i>", ev.StartDateTime.Value.ToString("g"))
+            @T(" and lasts until <i>{0}</i>", ev.EndDateTime.Value.ToString("g"))
+        }
+    }
+
+    @{
+        if (Model.IsRecurring)
+        { @T(" it is recurring");
+        }
+        else
+        { @T(" it is not recurring");
+        }
+    }
+</section>

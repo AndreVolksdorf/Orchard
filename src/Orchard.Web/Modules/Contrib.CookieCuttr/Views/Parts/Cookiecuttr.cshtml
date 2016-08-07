@@ -1,0 +1,59 @@
+﻿@{
+    Style.Require("CookieCuttr");
+    Script.Require("CookieCuttr");
+    var settings = Model.CookieSettings;
+    var cookieAnalytics = settings.cookieAnalytics.ToString().ToLower();
+    var cookieNotificationLocationBottom = settings.cookieNotificationLocationBottom.ToString().ToLower();
+    var cookieAcceptButton = settings.showCookieAcceptButton.ToString().ToLower();
+    var cookieDeclineButton = settings.showCookieDeclineButton.ToString().ToLower();
+    var cookieResetButton = settings.showCookieResetButton.ToString().ToLower();
+    var cookieDiscreetReset = settings.cookieDiscreetReset.ToString().ToLower();
+    using (Script.Foot())
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var cookiesettings = {};
+                cookiesettings.cookieAnalytics = @cookieAnalytics;
+                @if (Boolean.Parse(cookieAnalytics)) {
+                    if (!string.IsNullOrWhiteSpace(settings.cookieAnalyticsMessage)) {
+                        <text>cookiesettings.cookieAnalyticsMessage = '@Html.Raw(settings.cookieAnalyticsMessage)';</text>
+                    }
+                    if (!string.IsNullOrWhiteSpace(settings.cookieWhatAreLinkText)) {
+                        <text>cookiesettings.cookieWhatAreLinkText = '@Html.Raw(settings.cookieWhatAreLinkText)';</text>
+                    }
+                    if (!string.IsNullOrWhiteSpace(settings.cookieWhatAreTheyLink)) {
+                        <text>cookiesettings.cookieWhatAreTheyLink = '@Html.Raw(settings.cookieWhatAreTheyLink)';</text>
+                    }
+                }
+                else {
+                    if (!string.IsNullOrWhiteSpace(settings.cookieMessage)) {
+                        <text>cookiesettings.cookieMessage = '@Html.Raw(settings.cookieMessage)';</text>
+                    }
+                    if (!string.IsNullOrWhiteSpace(settings.cookieAnalyticsMessage)) {
+                        <text>cookiesettings.cookiePolicyLink = '@settings.cookiePolicyLink';</text>
+                    }
+                }
+                // positioning
+                cookiesettings.cookieNotificationLocationBottom = @cookieNotificationLocationBottom;
+                cookiesettings.cookieDiscreetReset = @cookieDiscreetReset;
+                @if (!string.IsNullOrWhiteSpace(settings.cookieDiscreetPosition)) {
+                    <text>cookiesettings.cookieDiscreetPosition = '@settings.cookieDiscreetPosition';</text>
+                }
+                // buttons
+                cookiesettings.cookieAcceptButton = @cookieAcceptButton;
+                cookiesettings.cookieDeclineButton  = @cookieDeclineButton;
+                cookiesettings.cookieResetButton  = @cookieResetButton;
+                @if (!string.IsNullOrWhiteSpace(settings.cookieAcceptButtonText)) {
+                    <text>cookiesettings.cookieAcceptButtonText = '@settings.cookieAcceptButtonText';</text>
+                }
+                @if (!string.IsNullOrWhiteSpace(settings.cookieDeclineButtonText)) {
+                    <text>cookiesettings.cookieDeclineButtonText = '@settings.cookieDeclineButtonText';</text>
+                }
+                @if (!string.IsNullOrWhiteSpace(settings.cookieResetButtonText)) {
+                    <text>cookiesettings.cookieResetButtonText = '@settings.cookieResetButtonText';</text>
+                }
+                $.cookieCuttr(cookiesettings);
+            });
+        </script>
+    }
+}
