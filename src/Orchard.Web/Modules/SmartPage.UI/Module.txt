@@ -1,0 +1,10 @@
+﻿Name: SmartPage.UI
+AntiForgery: enabled
+Author: The Orchard Team
+Website: http://www.smartpage.de
+Version: 1.0
+OrchardVersion: 1.10
+Description: Common Resources for SmartPage Themes and Modules
+Features:
+    SmartPage.UI:
+        Description: Description for feature SmartPage.UI.
